@@ -7,19 +7,46 @@
     android:fitsSystemWindows="true"
     tools:context=".Join">
 
+    <Spinner
+        android:id="@+id/join_cb_level"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_join_tel" />
+
+    <TextView
+        android:id="@+id/tv_join_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="275dp"
+        android:text="채식 단계"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_join_tel" />
+
     <EditText
         android:id="@+id/edt_join_age"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="9dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="나이"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_name" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_join" />
 
     <TextView
         android:id="@+id/tv_join_age"
@@ -71,14 +98,14 @@
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="-구분없이 입력"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_name" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_join_age" />
 
     <TextView
         android:id="@+id/tv_join_tel"

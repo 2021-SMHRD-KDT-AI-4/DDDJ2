@@ -77,7 +77,7 @@ public class Main extends AppCompatActivity {
         btn_nav_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                Intent intent = new Intent(getApplicationContext(),DiaryCalendar.class);
                 startActivity(intent);
             }
         });

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectVegan">
-        <activity android:name=".Calendar" />
+        <activity android:name=".DiaryCalendar"></activity>
+        <activity android:name=".SearchItem" />
         <activity android:name=".Quiz" />
         <activity android:name=".Challenge" />
         <activity android:name=".EditMyInfo" />

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="64dp"
-        android:text="문제. 오레오는 비건일까요?"
+        android:text="문제. 오레오는 비건 음식일까요?"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
