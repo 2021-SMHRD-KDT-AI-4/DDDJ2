@@ -10,11 +10,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,12 @@ public class Join extends AppCompatActivity {
 
         btn_join = findViewById(R.id.btn_join);
         btn_back = findViewById(R.id.btn_back);
+
+        Spinner join_vegetarian = (Spinner)findViewById(R.id.join_cb_level);
+        ArrayAdapter yearAdapter = ArrayAdapter.createFromResource(this,
+                R.array.join_level, android.R.layout.simple_spinner_item);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        join_vegetarian.setAdapter(yearAdapter);
 
         rg_join.setOnClickListener(new View.OnClickListener() {
             @Override

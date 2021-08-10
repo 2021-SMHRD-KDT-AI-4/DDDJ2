@@ -2,47 +2,95 @@ package com.example.projectvegan;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MyPage extends AppCompatActivity {
-    private String[] title = {"탄수화물","단백질","지방","비타민","나트륨"};
     private int[] color_array = {Color.rgb(76,175,80),Color.rgb(139,195,74),
-                                 Color.rgb(205,220,57),Color.rgb(255,235,59),
-                                 Color.rgb(255,193,7)};
+                                 Color.rgb(170,182,48),Color.rgb(211,189,4),
+                                 Color.rgb(188,141,3)};
 
+    private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date;
     private ImageView edit_info;
+    private Button btn_my_calendar;
+
+    private int breakfast,lunch,dinner = 0;
+    Calendar cal = Calendar.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
 
+        // 액션바 설정
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("마이페이지");
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        tv_breakfast = findViewById(R.id.tv_breakfast);
+        tv_lunch = findViewById(R.id.tv_lunch);
+        tv_dinner = findViewById(R.id.tv_dinner);
+        btn_my_calendar = findViewById(R.id.btn_my_calendar);
+
+        tv_my_cal_date = findViewById(R.id.tv_my_cal_date);
+        tv_my_cal_date.setText(cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE));
+
         edit_info = findViewById(R.id.edit_info);
 
+        // 아침 정보
+        tv_breakfast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                breakfast = Integer.parseInt(tv_breakfast.getText().toString());
+            }
+        });
+
+        // 점심 정보
+        tv_lunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lunch = Integer.parseInt(tv_lunch.getText().toString());
+            }
+        });
+
+        // 저녁 정보
+        tv_dinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dinner = Integer.parseInt(tv_dinner.getText().toString());
+            }
+        });
+
+        //선택 날짜 정보
+        btn_my_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker(getCurrentFocus());
+            }
+        });
+
+        ProgressBar pg_kcal = (ProgressBar) findViewById(R.id.pg_kcal);
+        pg_kcal.setProgress(breakfast+lunch+dinner);
+
+        //회원정보 수정
         edit_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,16 +102,6 @@ public class MyPage extends AppCompatActivity {
         //영양소 막대차트
         BarChart barChart = findViewById(R.id.bar_chart);
         ArrayList<BarEntry> nutrient = new ArrayList<>();
-
-
-        ArrayList<String> labels = new ArrayList<String>();
-
-        labels.add("탄수화물");
-        labels.add("단백질");
-        labels.add("지방");
-        labels.add("비타민");
-        labels.add("나트륨");
-        labels.add("June");
 
         nutrient.add(new BarEntry(1,100));
         nutrient.add(new BarEntry(3,200));
@@ -82,33 +120,22 @@ public class MyPage extends AppCompatActivity {
 
         barChart.getDescription().setEnabled(false);
         barChart.animateY(2000);
-
-        /*//칼로리 파이차트
-        PieChart pieChart = findViewById(R.id.pie_chart);
-        ArrayList<PieEntry> kcal = new ArrayList<>();
-        kcal.add(new PieEntry(1,"탄"));
-        kcal.add(new PieEntry(1,"단"));
-        kcal.add(new PieEntry(1,"지"));
-        kcal.add(new PieEntry(1,"비"));
-        kcal.add(new PieEntry(1,"나"));
-
-        PieDataSet pieDataSet = new PieDataSet(kcal,"칼로리");
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextColor(Color.BLACK);
-        pieDataSet.setValueTextSize(16f);
-
-        PieData pieData = new PieData(pieDataSet);
-
-        pieChart.setData(pieData);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setCenterText("칼로리");
-        pieChart.animate();*/
     }
 
+    public void showDatePicker(View view){
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(),"datePicker");
+    }
+    public void processDatePickerResult(int year, int month, int day){
+        tv_my_cal_date.setText(String.format("%d-%d-%d",year,month+1,day));
+    }
+
+
+    //toolbar의 back키 눌렀을 때 동작
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+            case android.R.id.home:{
                 finish();
                 return true;
             }
