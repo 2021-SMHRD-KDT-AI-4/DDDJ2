@@ -21,6 +21,7 @@
         <activity android:name=".MyPage" />
         <activity android:name=".Rank" />
         <activity android:name=".Join" />
+        <activity android:name=".Scanner"/>
         <activity
             android:name=".Login"
             android:parentActivityName=".Main" />

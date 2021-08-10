@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.projectvegan.Challenge;
 import com.example.projectvegan.Rank;
 import com.example.projectvegan.Quiz;
+import com.example.projectvegan.Scanner;
 import com.example.projectvegan.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment {
         btn_scanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Rank.class);
+                Intent intent = new Intent(getContext(), Scanner.class);
                 startActivity(intent);
             }
         });

@@ -24,19 +24,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -82,11 +82,10 @@ public class Scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("스캐너");
 
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -146,7 +145,7 @@ public class Scanner extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case CAMERA_PERMISSIONS_REQUEST:
@@ -190,10 +189,7 @@ public class Scanner extends AppCompatActivity {
 
         VisionRequestInitializer requestInitializer =
                 new VisionRequestInitializer(CLOUD_VISION_API_KEY) {
-                    /**
-                     * We override this so we can inject important identifying fields into the HTTP
-                     * headers. This enables use of a restricted cloud platform API key.
-                     */
+
                     @Override
                     protected void initializeVisionRequest(VisionRequest<?> visionRequest)
                             throws IOException {
@@ -218,10 +214,8 @@ public class Scanner extends AppCompatActivity {
         batchAnnotateImagesRequest.setRequests(new ArrayList<AnnotateImageRequest>() {{
             AnnotateImageRequest annotateImageRequest = new AnnotateImageRequest();
 
-            // Add the image
             Image base64EncodedImage = new Image();
-            // Convert the bitmap to a JPEG
-            // Just in case it's a format that Android understands but Cloud Vision
+
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
             byte[] imageBytes = byteArrayOutputStream.toByteArray();
