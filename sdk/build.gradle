@@ -118,6 +118,8 @@ android {
                 doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
             }
         }
+        buildTypes {
+        }
         release {
             packagingOptions {
                 doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
