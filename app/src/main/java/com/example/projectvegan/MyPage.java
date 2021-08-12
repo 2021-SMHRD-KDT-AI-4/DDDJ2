@@ -59,7 +59,13 @@ public class MyPage extends AppCompatActivity {
         tv_breakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                breakfast = Integer.parseInt(tv_breakfast.getText().toString());
+                if (tv_breakfast.getText().toString().equals("kcal")){
+                    Intent intent = new Intent(getApplicationContext(),SearchItem.class);
+                    startActivity(intent);
+                }else {
+                    breakfast = Integer.parseInt(tv_breakfast.getText().toString());
+
+                }
             }
         });
 
@@ -67,7 +73,12 @@ public class MyPage extends AppCompatActivity {
         tv_lunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lunch = Integer.parseInt(tv_lunch.getText().toString());
+                if (tv_lunch.getText().toString().equals("kcal")){
+                    Intent intent = new Intent(getApplicationContext(),SearchItem.class);
+                    startActivity(intent);
+                }else {
+                    lunch = Integer.parseInt(tv_lunch.getText().toString());
+                }
             }
         });
 
@@ -75,7 +86,12 @@ public class MyPage extends AppCompatActivity {
         tv_dinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dinner = Integer.parseInt(tv_dinner.getText().toString());
+                if (tv_dinner.getText().toString().equals("kcal")){
+                    Intent intent = new Intent(getApplicationContext(),SearchItem.class);
+                    startActivity(intent);
+                }else {
+                    dinner = Integer.parseInt(tv_dinner.getText().toString());
+                }
             }
         });
 
@@ -124,6 +140,7 @@ public class MyPage extends AppCompatActivity {
 
     public void showDatePicker(View view){
         DialogFragment newFragment = new DatePickerFragment();
+
         newFragment.show(getSupportFragmentManager(),"datePicker");
     }
     public void processDatePickerResult(int year, int month, int day){

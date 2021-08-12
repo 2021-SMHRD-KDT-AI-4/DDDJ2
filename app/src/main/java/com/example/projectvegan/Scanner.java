@@ -26,6 +26,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -321,5 +322,17 @@ public class Scanner extends AppCompatActivity {
             message  = "nothing";
         }
         return message;
+    }
+
+    //toolbar의 back키 눌렀을 때 동작
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

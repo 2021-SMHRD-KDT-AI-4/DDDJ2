@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -20,7 +23,7 @@ public class Challenge extends AppCompatActivity {
     private ViewPager2 chal_pager;
     private TabPageAdapter tabPageAdapter;
 
-    private  String[] titles = {"전체", "내 타입"};
+    private  String[] titles = {"전체", "My 챌린지"};
 
 
     @Override

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Notice">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_notice"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="우리가 채식을 해야 하는 이유"
+                android:textColor="#020202"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center|left"
+                android:text="1. 고기 및 인스턴트식품 과잉 섭취는 아토피를 유발한다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="2. 채식으로 육류 소비량을 줄여 배출되는 온실가스 양을 낮춰 지구온난화를 막을 수 있다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="3. 비만 등에 대한 건강 문제를 해결할 수 있다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="4. 채식만 할 경우 영양 불균형이 온다는 정보는 잘못된 정보이다. 체내에서 생성되는 영양소와 균형 잡힌 채식을 한다면 충분히 영양 불균형을 해결할 수 있다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center|left"
+                android:text="채식 시작 전 알아보는 채식 단계 유형"
+                android:textColor="#020202"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="32dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/vg_level" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="1. 플렉시테리언 : 모두 섭취 가능하며 하루 한 끼 간헐적 채식을 하는 것을 목표로 한다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="2. 폴로 베지테리언 : 고기 섭취는 닭고기 까지만 가능하며 소고기, 돼지고기 등은 섭취할 수 없다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="3. 페스코 베지테리언: 육류 섭취가 불가능하며 생선까지는 섭취가 가능하다"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="4. 락토 오보 베지테리언 : 유제품과 계랑의 섭취가 가능하며 육류와 생선의 섭취가 불가능하다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="5. 오보 베지테리언 : 유제품의 섭취가 불가능하며 계란은 섭취할 수 있다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="6. 락토 베지테리언: 계란의 섭취가 불가능하며 유제품은 섭취할 수 있다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="7. 비건 : 채소를 제외한 모든 식품 섭취가 불가능하다."
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center|left"
+                android:text="아래와 같은 분들은 챌린지에 도전해보세요~"
+                android:textColor="#020202"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="1. 채식을 시도해보고자 했으나 뭐부터 해야 할지 몰라 시작하기 힘들었던 분"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="2. 매번 채식에 도전하지만 혼자 지속하기 어려웠던 분"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="3. 코로나, 폭염, 폭우 등 기후위기를 온몸으로 느끼며 지구를 위해 할 수 있는 일을 고민하시는 분"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="4. 내 몸과 온갖 생명들의 연결을 생각해보고 싶으신 분"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center|left"
+                android:text="5. 식생활 변화를 통해 내 몸을 소중하게 돌보고 싶으신 분"
+                android:textColor="#020202"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

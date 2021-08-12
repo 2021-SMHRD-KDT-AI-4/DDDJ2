@@ -12,18 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.projectvegan.databinding.FragmentChalFragOneBinding;
+import com.example.projectvegan.databinding.FragmentChalFragTwoBinding;
 import com.example.projectvegan.placeholder.PlaceholderContent;
 
 /**
  * A fragment representing a list of Items.
  */
 public class ChalFragTwo extends Fragment {
+    private FragmentChalFragTwoBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chal_frag_two, container, false);
 
-        return view;
+        binding = FragmentChalFragTwoBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+
+        return root;
     }
 }

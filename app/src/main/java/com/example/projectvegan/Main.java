@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.projectvegan.databinding.NavHeaderMainBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,10 +44,13 @@ public class Main extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
         View nav_header_view = navigationView.getHeaderView(0);
+
 
         TextView tv_nav_login = (TextView) nav_header_view.findViewById(R.id.tv_nav_login);
         tv_nav_login.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +88,7 @@ public class Main extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
