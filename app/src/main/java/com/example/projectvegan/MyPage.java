@@ -27,9 +27,19 @@ public class MyPage extends AppCompatActivity {
                                  Color.rgb(170,182,48),Color.rgb(211,189,4),
                                  Color.rgb(188,141,3)};
 
-    private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date;
+    private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date,
+            tv_kcal,tv_my_kcal,tv_protein,tv_natrum,tv_fat,tv_sugar,tv_carb,
+            tv_my_level_title;
+    private ProgressBar pg_kcal;
+
     private ImageView edit_info;
     private Button btn_my_calendar;
+
+    private float carbohydrate = 0;
+    private float protein = 0;
+    private float fat = 0;
+    private float natrum = 0;
+    private float sugar = 0;
 
     private int breakfast,lunch,dinner = 0;
     Calendar cal = Calendar.getInstance();
@@ -45,15 +55,75 @@ public class MyPage extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        tv_my_level_title = findViewById(R.id.tv_my_level_title);
+
+
         tv_breakfast = findViewById(R.id.tv_breakfast);
         tv_lunch = findViewById(R.id.tv_lunch);
         tv_dinner = findViewById(R.id.tv_dinner);
         btn_my_calendar = findViewById(R.id.btn_my_calendar);
 
+        tv_my_kcal = findViewById(R.id.tv_my_kcal);
+        tv_carb = findViewById(R.id.tv_carb);
+        tv_protein = findViewById(R.id.tv_protein);
+        tv_fat = findViewById(R.id.tv_fat);
+        tv_natrum = findViewById(R.id.tv_natrum);
+        tv_sugar = findViewById(R.id.tv_sugar);
+
+        pg_kcal = findViewById(R.id.pg_kcal);
+
         tv_my_cal_date = findViewById(R.id.tv_my_cal_date);
         tv_my_cal_date.setText(cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE));
 
         edit_info = findViewById(R.id.edit_info);
+
+        Intent intent = getIntent();
+        int age = Integer.parseInt(intent.getStringExtra("age"));
+        String gender = intent.getStringExtra("gender");
+
+        if (age>=10 && age<30 && gender.equals("남")){
+            tv_kcal.setText("칼로리 : 2700kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 55g");
+            tv_fat.setText("지방 : 50g");
+            tv_natrum.setText("나트륨 : 1500mg");
+            tv_sugar.setText("당류 : 50g");
+        }else if(age>=10 && age<30 && gender.equals("여")){
+            tv_kcal.setText("칼로리 : 2000kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 50g");
+            tv_fat.setText("지방 : 50g");
+            tv_natrum.setText("나트륨 : 1500mg");
+            tv_sugar.setText("당류 : 50g");
+        }else if(age>=30 && age<50 && gender.equals("남")){
+            tv_kcal.setText("칼로리 : 2400kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 55g");
+            tv_fat.setText("지방 : 50g");
+            tv_natrum.setText("나트륨 : 1500mg");
+            tv_sugar.setText("당류 : 50g");
+        }else if(age>=30 && age<50 && gender.equals("여")){
+            tv_kcal.setText("칼로리 : 1900kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 45g");
+            tv_fat.setText("지방 : 45g");
+            tv_natrum.setText("나트륨 : 1500mg");
+            tv_sugar.setText("당류 : 45g");
+        }else if(age>=50 && age<65 && gender.equals("남")){
+            tv_kcal.setText("칼로리 : 2200kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 50g");
+            tv_fat.setText("지방 : 45g");
+            tv_natrum.setText("나트륨 : 1400mg");
+            tv_sugar.setText("당류 : 45g");
+        }else if(age>=50 && age<65 && gender.equals("여")){
+            tv_kcal.setText("칼로리 : 1800kcal");
+            tv_carb.setText("탄수화물 : 328g");
+            tv_protein.setText("단백질 : 45g");
+            tv_fat.setText("지방 : 40g");
+            tv_natrum.setText("나트륨 : 1400mg");
+            tv_sugar.setText("당류 : 40g");
+        }
 
         // 아침 정보
         tv_breakfast.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +165,7 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
+
         //선택 날짜 정보
         btn_my_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +176,11 @@ public class MyPage extends AppCompatActivity {
 
         ProgressBar pg_kcal = (ProgressBar) findViewById(R.id.pg_kcal);
         pg_kcal.setProgress(breakfast+lunch+dinner);
+
+        int progress = breakfast+lunch+dinner;
+
+        pg_kcal.setProgress(progress);
+        tv_my_kcal.setText(progress+"");
 
         //회원정보 수정
         edit_info.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +195,11 @@ public class MyPage extends AppCompatActivity {
         BarChart barChart = findViewById(R.id.bar_chart);
         ArrayList<BarEntry> nutrient = new ArrayList<>();
 
-        nutrient.add(new BarEntry(1,100));
-        nutrient.add(new BarEntry(3,200));
-        nutrient.add(new BarEntry(5,300));
-        nutrient.add(new BarEntry(7,20));
-        nutrient.add(new BarEntry(9,60));
+        nutrient.add(new BarEntry(1,carbohydrate));
+        nutrient.add(new BarEntry(3,protein));
+        nutrient.add(new BarEntry(5,fat));
+        nutrient.add(new BarEntry(7,natrum));
+        nutrient.add(new BarEntry(9,sugar));
 
         BarDataSet barDataSet = new BarDataSet(nutrient, "영양소");
         barDataSet.setColors(color_array);

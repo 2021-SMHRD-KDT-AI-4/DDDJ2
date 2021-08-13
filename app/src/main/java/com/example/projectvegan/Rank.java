@@ -36,7 +36,6 @@ public class Rank extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 */
 
-
         rank_list = findViewById(R.id.rank_list);
 
         rankFilteredList = new ArrayList<>();
