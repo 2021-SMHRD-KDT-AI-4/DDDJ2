@@ -71,11 +71,9 @@ public class Main extends AppCompatActivity {
         TextView tv_poing = (TextView)nav_header_view.findViewById(R.id.tv_point);
         ImageView img_tree = (ImageView)nav_header_view.findViewById(R.id.img_tree);
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        String pw = intent.getStringExtra("pw");
+        String id = PreferenceManager.getString(getApplicationContext(), "id");
 
-        if(id == null){
+        if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);
             btn_nav_mypage.setVisibility(View.INVISIBLE);
             tv_poing.setVisibility(View.INVISIBLE);
@@ -84,9 +82,9 @@ public class Main extends AppCompatActivity {
             btn_nav_logout.setVisibility(View.VISIBLE);
             btn_nav_mypage.setVisibility(View.VISIBLE);
             tv_poing.setVisibility(View.VISIBLE);
-            img_tree.setVisibility(View.VISIBLE);/*
-            tv_nav_login.setText(jsonObject.getString("name"));
-            tv_nav_subtitle.setText(jsonObject.getString("id"));*/
+            img_tree.setVisibility(View.VISIBLE);
+            tv_nav_login.setText(PreferenceManager.getString(getApplicationContext(), "name"));
+            tv_nav_subtitle.setText(PreferenceManager.getString(getApplicationContext(), "id"));
         }
 
 

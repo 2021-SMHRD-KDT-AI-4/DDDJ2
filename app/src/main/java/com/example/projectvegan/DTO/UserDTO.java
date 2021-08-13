@@ -1,4 +1,4 @@
-package com.example.projectvegan;
+package com.example.projectvegan.DTO;
 
 public class UserDTO {
 

@@ -124,9 +124,6 @@ public class CommunityUpdate extends AppCompatActivity {
     // 이미지 서버 저장
     public void sendRequest() {
 
-        String id = PreferenceManager.getString(getApplicationContext(), "id");
-        String name = PreferenceManager.getString(getApplicationContext(), "name");
-
         // Voolley Lib 새로운 요청객체 생성
         queue = Volley.newRequestQueue(this);
         String url = "http://211.63.240.58:8081/3rd_project/UploadService";
@@ -177,11 +174,11 @@ public class CommunityUpdate extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("id", id);
+                params.put("id", PreferenceManager.getString(getApplicationContext(), "id"));
                 params.put("content", edt_com_text.getText().toString());
                 params.put("title", edt_com_title.getText().toString());
                 params.put("a", resizeImg);
-                params.put("name", name);
+                params.put("name", PreferenceManager.getString(getApplicationContext(), "name"));
 
                 return params;
             }
