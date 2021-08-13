@@ -1,5 +1,6 @@
 package com.example.projectvegan;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -7,20 +8,38 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyPage extends AppCompatActivity {
     private int[] color_array = {Color.rgb(76,175,80),Color.rgb(139,195,74),
@@ -29,7 +48,7 @@ public class MyPage extends AppCompatActivity {
 
     private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date,
             tv_kcal,tv_my_kcal,tv_protein,tv_natrum,tv_fat,tv_sugar,tv_carb,
-            tv_my_level_title;
+            tv_my_level_title,tv_my_name;
     private ProgressBar pg_kcal;
 
     private ImageView edit_info;
@@ -40,9 +59,20 @@ public class MyPage extends AppCompatActivity {
     private float fat = 0;
     private float natrum = 0;
     private float sugar = 0;
+    int kcal = 0;
+    int progress = 0;
+    int max_kcal=0;
+
+    private String id = null;
+    private String pw = null;
 
     private int breakfast,lunch,dinner = 0;
+
     Calendar cal = Calendar.getInstance();
+
+    private String today =cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+    private RequestQueue queue;
+    private StringRequest stringRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +86,7 @@ public class MyPage extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         tv_my_level_title = findViewById(R.id.tv_my_level_title);
-
+        tv_my_name = findViewById(R.id.tv_my_name);
 
         tv_breakfast = findViewById(R.id.tv_breakfast);
         tv_lunch = findViewById(R.id.tv_lunch);
@@ -70,19 +100,30 @@ public class MyPage extends AppCompatActivity {
         tv_natrum = findViewById(R.id.tv_natrum);
         tv_sugar = findViewById(R.id.tv_sugar);
 
+
         pg_kcal = findViewById(R.id.pg_kcal);
 
         tv_my_cal_date = findViewById(R.id.tv_my_cal_date);
-        tv_my_cal_date.setText(cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE));
+        tv_my_cal_date.setText(today);
 
         edit_info = findViewById(R.id.edit_info);
 
         Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        pw = intent.getStringExtra("pw");
         int age = Integer.parseInt(intent.getStringExtra("age"));
+        String name = intent.getStringExtra("name");
         String gender = intent.getStringExtra("gender");
+        String category = intent.getStringExtra("category");
 
+
+        tv_my_level_title.setText(category);
+        tv_my_name.setText(name);
+
+        // 영양소 정보
         if (age>=10 && age<30 && gender.equals("남")){
             tv_kcal.setText("칼로리 : 2700kcal");
+            max_kcal = 2700;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 55g");
             tv_fat.setText("지방 : 50g");
@@ -90,6 +131,7 @@ public class MyPage extends AppCompatActivity {
             tv_sugar.setText("당류 : 50g");
         }else if(age>=10 && age<30 && gender.equals("여")){
             tv_kcal.setText("칼로리 : 2000kcal");
+            max_kcal = 2000;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 50g");
             tv_fat.setText("지방 : 50g");
@@ -97,6 +139,7 @@ public class MyPage extends AppCompatActivity {
             tv_sugar.setText("당류 : 50g");
         }else if(age>=30 && age<50 && gender.equals("남")){
             tv_kcal.setText("칼로리 : 2400kcal");
+            max_kcal = 2400;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 55g");
             tv_fat.setText("지방 : 50g");
@@ -104,6 +147,7 @@ public class MyPage extends AppCompatActivity {
             tv_sugar.setText("당류 : 50g");
         }else if(age>=30 && age<50 && gender.equals("여")){
             tv_kcal.setText("칼로리 : 1900kcal");
+            max_kcal = 1900;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 45g");
             tv_fat.setText("지방 : 45g");
@@ -111,6 +155,7 @@ public class MyPage extends AppCompatActivity {
             tv_sugar.setText("당류 : 45g");
         }else if(age>=50 && age<65 && gender.equals("남")){
             tv_kcal.setText("칼로리 : 2200kcal");
+            max_kcal = 2200;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 50g");
             tv_fat.setText("지방 : 45g");
@@ -118,6 +163,7 @@ public class MyPage extends AppCompatActivity {
             tv_sugar.setText("당류 : 45g");
         }else if(age>=50 && age<65 && gender.equals("여")){
             tv_kcal.setText("칼로리 : 1800kcal");
+            max_kcal = 1800;
             tv_carb.setText("탄수화물 : 328g");
             tv_protein.setText("단백질 : 45g");
             tv_fat.setText("지방 : 40g");
@@ -129,11 +175,14 @@ public class MyPage extends AppCompatActivity {
         tv_breakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_breakfast.getText().toString().equals("kcal")){
+                if (tv_my_cal_date.equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivity(intent);
-                }else {
-                    breakfast = Integer.parseInt(tv_breakfast.getText().toString());
+                    startActivityForResult(intent,1000);
+                    tv_breakfast.setText("섭취완료");
+
+                    breakfast = kcal;
+                    pg_kcal.setProgress(progress);
+                    tv_my_kcal.setText(progress+"");
 
                 }
             }
@@ -143,11 +192,15 @@ public class MyPage extends AppCompatActivity {
         tv_lunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_lunch.getText().toString().equals("kcal")){
+                if (tv_my_cal_date.equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivity(intent);
-                }else {
-                    lunch = Integer.parseInt(tv_lunch.getText().toString());
+                    startActivityForResult(intent,1000);
+                    tv_lunch.setText("섭취완료");
+
+                    lunch = kcal;
+                    pg_kcal.setProgress(progress);
+                    tv_my_kcal.setText(progress+"");
+
                 }
             }
         });
@@ -156,31 +209,34 @@ public class MyPage extends AppCompatActivity {
         tv_dinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_dinner.getText().toString().equals("kcal")){
+                if (tv_my_cal_date.equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivity(intent);
-                }else {
-                    dinner = Integer.parseInt(tv_dinner.getText().toString());
+                    startActivityForResult(intent,1000);
+                    tv_dinner.setText("섭취완료");
+
+                    dinner = kcal;
+                    pg_kcal.setProgress(progress);
+                    tv_my_kcal.setText(progress+"");
+
                 }
             }
         });
-
 
         //선택 날짜 정보
         btn_my_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePicker(getCurrentFocus());
+                sendRequestSelect();
+
+                pg_kcal.setProgress(progress);
+                tv_my_kcal.setText(progress+"");
+
             }
         });
 
-        ProgressBar pg_kcal = (ProgressBar) findViewById(R.id.pg_kcal);
-        pg_kcal.setProgress(breakfast+lunch+dinner);
-
-        int progress = breakfast+lunch+dinner;
-
-        pg_kcal.setProgress(progress);
-        tv_my_kcal.setText(progress+"");
+        // 나의 권장 칼로리 정보
+        pg_kcal.setMax(max_kcal);
 
         //회원정보 수정
         edit_info.setOnClickListener(new View.OnClickListener() {
@@ -212,6 +268,9 @@ public class MyPage extends AppCompatActivity {
 
         barChart.getDescription().setEnabled(false);
         barChart.animateY(2000);
+
+        sendRequestUpdate();
+
     }
 
     public void showDatePicker(View view){
@@ -219,10 +278,169 @@ public class MyPage extends AppCompatActivity {
 
         newFragment.show(getSupportFragmentManager(),"datePicker");
     }
+
     public void processDatePickerResult(int year, int month, int day){
         tv_my_cal_date.setText(String.format("%d-%d-%d",year,month+1,day));
     }
 
+    public void sendRequestSelect(){
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(this);
+        String url = "http://211.63.240.58:8081/3rd_project/UploadService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+
+                if(!response.equals("null")){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        breakfast = Integer.parseInt(jsonObject.getString("breakfast"));
+                        lunch = Integer.parseInt(jsonObject.getString("lunch"));
+                        dinner = Integer.parseInt(jsonObject.getString("dinner"));
+                        carbohydrate = Float.parseFloat(jsonObject.getString("carbohydrate"));
+                        protein = Float.parseFloat(jsonObject.getString("protein"));
+                        fat = Float.parseFloat(jsonObject.getString("fat"));
+                        natrum = Float.parseFloat(jsonObject.getString("natrum"));
+                        sugar = Float.parseFloat(jsonObject.getString("sugar"));
+                        kcal = Integer.parseInt(jsonObject.getString("kcal"));
+
+                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
+
+                        intent.putExtra("breakfast",breakfast);
+                        intent.putExtra("lunch",lunch);
+                        intent.putExtra("dinner",dinner);
+                        intent.putExtra("carbohydrate",carbohydrate);
+                        intent.putExtra("protein",protein);
+                        intent.putExtra("fat",fat);
+                        intent.putExtra("natrum",natrum);
+                        intent.putExtra("sugar",sugar);
+                        intent.putExtra("kcal",kcal);
+
+                        startActivity(intent);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"갱신 실패",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id",id);
+                params.put("pw",pw);
+                params.put("date",tv_my_cal_date.getText().toString());
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    public void sendRequestUpdate(){
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(this);
+        String url = "http://211.63.240.58:8081/3rd_project/UploadService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+
+                if(!response.equals("null")){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"등록 실패",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id",id);
+                params.put("date",today);
+                params.put("breakfast",String.valueOf(breakfast));
+                params.put("lunch",String.valueOf(lunch));
+                params.put("dinner",String.valueOf(dinner));
+                params.put("carbohydrate",String.valueOf(carbohydrate));
+                params.put("protein",String.valueOf(protein));
+                params.put("fat",String.valueOf(fat));
+                params.put("natrum",String.valueOf(natrum));
+                params.put("sugar",String.valueOf(sugar));
+                params.put("kcal",String.valueOf(kcal));
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0 && resultCode == RESULT_OK){
+            carbohydrate += Float.parseFloat(data.getStringExtra("carbohydrate"));
+            protein += Float.parseFloat(data.getStringExtra("protein"));
+            fat += Float.parseFloat(data.getStringExtra("fat"));
+            natrum += Float.parseFloat(data.getStringExtra("natrum"));
+            sugar += Float.parseFloat(data.getStringExtra("sugar"));
+            kcal += Integer.parseInt(data.getStringExtra("kcal"));
+
+            progress += kcal;
+
+        }
+    }
 
     //toolbar의 back키 눌렀을 때 동작
     @Override
