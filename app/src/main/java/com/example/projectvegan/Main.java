@@ -38,7 +38,6 @@ public class Main extends AppCompatActivity {
     private ActivityMainBinding binding;
     private int[] imgs = {R.drawable.tree1,R.drawable.tree2,R.drawable.tree3};
 
-    private String id = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +71,8 @@ public class Main extends AppCompatActivity {
         TextView tv_poing = (TextView)nav_header_view.findViewById(R.id.tv_point);
         ImageView img_tree = (ImageView)nav_header_view.findViewById(R.id.img_tree);
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
         if(id == null){
             btn_nav_logout.setVisibility(View.INVISIBLE);
             btn_nav_mypage.setVisibility(View.INVISIBLE);
