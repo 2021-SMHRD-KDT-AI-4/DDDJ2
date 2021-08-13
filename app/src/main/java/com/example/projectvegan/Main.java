@@ -73,6 +73,8 @@ public class Main extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+        String pw = intent.getStringExtra("pw");
+
         if(id == null){
             btn_nav_logout.setVisibility(View.INVISIBLE);
             btn_nav_mypage.setVisibility(View.INVISIBLE);
