@@ -1,37 +1,24 @@
 package com.example.projectvegan;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 
 public class Rank extends AppCompatActivity {
-    private final String TAG = this.getClass().getSimpleName();
-    Context context;
-
-    private TabLayout tabLayout;
-    private ViewPager2 diary_pager;
-    private TabPageAdapter tabPageAdapter;
-
-    private  String[] titles = {"전체", "내 타입"};
-
-    String code;
-
-
+    private RecyclerView rank_list;
+    private ArrayList<RankItem> rankArrayList, rankFilteredList;
+    RankAdapter rankAdapter;
+    LinearLayoutManager linearLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,30 +27,62 @@ public class Rank extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("랭킹");
         actionBar.setDisplayHomeAsUpEnabled(true);
+        /*androidx.appcompat.widget.Toolbar mToolbar = findViewById(R.id.toolbar);
+        mToolbar.setTitle("랭킹");
+        mToolbar.setTitleTextColor(Color.BLACK);
 
-        context = Rank.this;
+        setSupportActionBar(mToolbar);
 
-        Fragment frag1 = new FragmentOne();
-        Fragment frag2 = new FragmentTwo();
-
-
-
-        tabLayout = (TabLayout) findViewById(R.id.diary_tab);
-
-        diary_pager = findViewById(R.id.diary_pager);
-
-        tabPageAdapter = new TabPageAdapter(this);
-        tabPageAdapter.addFrag(frag1);
-        tabPageAdapter.addFrag(frag2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+*/
 
 
-        diary_pager.setAdapter(tabPageAdapter);
+        rank_list = findViewById(R.id.rank_list);
 
-        new TabLayoutMediator(tabLayout,diary_pager,(tab, position) -> tab.setText(titles[position])).attach();
+        rankFilteredList = new ArrayList<>();
+        rankArrayList = new ArrayList<>();
 
+        rankAdapter = new RankAdapter(rankArrayList,getApplicationContext());
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rank_list.setLayoutManager(linearLayoutManager);
+        rank_list.setAdapter(rankAdapter);
+
+        rank_list.addItemDecoration(new RecyclerViewDecoration(60));
+
+        /*//RecyclerView 구분선
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rank_list.getContext(), new LinearLayoutManager(this).getOrientation());
+        rank_list.addItemDecoration(dividerItemDecoration);
+        */
+        settingList();
+
+        rankArrayList.addAll(rankFilteredList);
     }
 
 
+    private void settingList(){
+        rankArrayList.add(new RankItem("1","집","돈가스"));
+        rankArrayList.add(new RankItem("2","가고","먹고"));
+        rankArrayList.add(new RankItem("3","싶다","싶다"));
+
+        rankAdapter.notifyDataSetChanged();
+    }
+
+    public class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
+
+        private final int divHeight;
+
+        public RecyclerViewDecoration(int divHeight)
+        {
+            this.divHeight = divHeight;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)
+        {
+            super.getItemOffsets(outRect, view, parent, state);
+            outRect.top = divHeight;
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

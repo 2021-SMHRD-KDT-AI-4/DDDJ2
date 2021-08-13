@@ -4,34 +4,158 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".Rank">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/diary_tab"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="318dp"
+        android:background="@drawable/background_notice"
+        android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전체" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="331dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 타입" />
+            <TextView
+                android:id="@+id/rank3_point"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="292dp"
+                android:gravity="center"
+                android:hint="point"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rank3_name" />
 
-    </com.google.android.material.tabs.TabLayout>
+            <TextView
+                android:id="@+id/rank3_name"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="292dp"
+                android:layout_marginTop="200dp"
+                android:gravity="center"
+                android:hint="이름"
+                android:text="이름"
+                android:textColor="#F44336"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/diary_pager"
+            <TextView
+                android:id="@+id/rank2_name"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="200dp"
+                android:gravity="center"
+                android:hint="이름"
+                android:text="이름"
+                android:textColor="#857B7B"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rank2_point"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="44dp"
+                android:gravity="center"
+                android:hint="point"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rank2_name" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                android:layout_marginStart="278dp"
+                android:layout_marginTop="98dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bronze" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="96dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/silver" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="136dp"
+                android:layout_marginTop="80dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gold" />
+
+            <TextView
+                android:id="@+id/rank1_point"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="168dp"
+                android:gravity="center"
+                android:hint="point"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rank1_name" />
+
+            <TextView
+                android:id="@+id/rank1_name"
+                android:layout_width="58dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="168dp"
+                android:layout_marginTop="218dp"
+                android:gravity="center"
+                android:hint="이름"
+                android:text="이름"
+                android:textColor="#E49653"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rank_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>

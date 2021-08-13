@@ -13,8 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.projectvegan.Challenge;
-import com.example.projectvegan.Rank;
+import com.example.projectvegan.Community;
 import com.example.projectvegan.Quiz;
+import com.example.projectvegan.Rank;
 import com.example.projectvegan.Recipe;
 import com.example.projectvegan.Scanner;
 import com.example.projectvegan.databinding.FragmentHomeBinding;
@@ -32,9 +33,11 @@ public class HomeFragment extends Fragment {
         final Button btn_chal = binding.btnChal;
         final Button btn_scanner = binding.btnScanner;
         final Button btn_rank = binding.btnRank;
+        final Button btn_sns = binding.btnSns;
         final TextView tv_main_quiz =  binding.tvMainQuiz;
         final TextView tv_main_recipe = binding.tvMainRecipe;
         final ImageView img_main_recipe = binding.imgMainRecipe;
+
         tv_main_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +80,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Rank.class);
+                startActivity(intent);
+            }
+        });
+        btn_sns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Community.class);
                 startActivity(intent);
             }
         });

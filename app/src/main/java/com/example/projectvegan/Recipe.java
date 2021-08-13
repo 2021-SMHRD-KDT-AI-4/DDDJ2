@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ public class Recipe extends AppCompatActivity {
         rFilteredList = new ArrayList<>();
         recipeFoodItemArrayList = new ArrayList<>();
 
-        recipeAdapter = new RecipeAdapter(recipeFoodItemArrayList,this);
+        recipeAdapter = new RecipeAdapter(recipeFoodItemArrayList,getApplicationContext());
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         rv_rc_search_item.setLayoutManager(linearLayoutManager);
         rv_rc_search_item.setAdapter(recipeAdapter);
@@ -66,7 +67,7 @@ public class Recipe extends AppCompatActivity {
         for(int i = 0; i < recipeFoodItemArrayList.size(); i++)
         {
             // arraylist의 모든 데이터에 입력받은 단어(searchText)가 포함되어 있으면 true를 반환한다.
-            if (recipeFoodItemArrayList.get(i).getFoodName().toLowerCase().contains(searchText.toLowerCase()))
+            if (recipeFoodItemArrayList.get(i).getRecipeFoodName().toLowerCase().contains(searchText.toLowerCase()))
             {
                 // 검색된 데이터를 리스트에 추가한다.
                 rFilteredList.add(recipeFoodItemArrayList.get(i));
@@ -76,12 +77,11 @@ public class Recipe extends AppCompatActivity {
     }
 
     private void settingList(){
-        recipeFoodItemArrayList.add(new RecipeItem("피자"));
-        recipeFoodItemArrayList.add(new RecipeItem("햄버거"));
-        recipeFoodItemArrayList.add(new RecipeItem("피자치킨햄버거"));
+        recipeFoodItemArrayList.add(new RecipeItem("피자","맛있다","치즈"));
+        recipeFoodItemArrayList.add(new RecipeItem("햄버거","맛있다","빵"));
+        recipeFoodItemArrayList.add(new RecipeItem("피자치킨햄버거","맛있다","뭐냐"));
 
         recipeAdapter.notifyDataSetChanged();
-
     }
     //toolbar의 back키 눌렀을 때 동작
     @Override

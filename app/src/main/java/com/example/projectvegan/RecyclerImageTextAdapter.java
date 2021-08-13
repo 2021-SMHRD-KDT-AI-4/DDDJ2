@@ -24,7 +24,7 @@ public class RecyclerImageTextAdapter extends RecyclerView.Adapter<RecyclerImage
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.recycler_item, parent, false);
+        View view = inflater.inflate(R.layout.community_item, parent, false);
         RecyclerImageTextAdapter.ViewHolder vh = new RecyclerImageTextAdapter.ViewHolder(view);
         return vh;
     }
@@ -51,9 +51,9 @@ public class RecyclerImageTextAdapter extends RecyclerView.Adapter<RecyclerImage
         public ViewHolder(View itemView) {
             super(itemView);
 
-            icon = itemView.findViewById(R.id.icon);
-            title = itemView.findViewById(R.id.title);
-            desc = itemView.findViewById(R.id.desc);
+            icon = itemView.findViewById(R.id.user_icon);
+            title = itemView.findViewById(R.id.user_name);
+            desc = itemView.findViewById(R.id.user_email);
         }
     }
 }

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="331dp"
+        android:background="@drawable/background_notice"
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.ProjectVegan.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/Theme.ProjectVegan.PopupOverlay"></androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/rank3_point"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="292dp"
+                    android:gravity="center"
+                    android:hint="point"
+                    android:text="400p"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rank3_name" />
+
+                <TextView
+                    android:id="@+id/rank3_name"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="292dp"
+                    android:layout_marginTop="200dp"
+                    android:gravity="center"
+                    android:hint="이름"
+                    android:text="이름"
+                    android:textColor="#F44336"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/rank2_name"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="200dp"
+                    android:gravity="center"
+                    android:hint="이름"
+                    android:text="이름"
+                    android:textColor="#857B7B"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/rank2_point"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="44dp"
+                    android:gravity="center"
+                    android:text="500p"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rank2_name" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
+                    android:layout_marginStart="278dp"
+                    android:layout_marginTop="98dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/bronze" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="96dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/silver" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginStart="136dp"
+                    android:layout_marginTop="80dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/gold" />
+
+                <TextView
+                    android:id="@+id/rank1_point"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="168dp"
+                    android:gravity="center"
+                    android:hint="point"
+                    android:text="1000p"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rank1_name" />
+
+                <TextView
+                    android:id="@+id/rank1_name"
+                    android:layout_width="58dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="168dp"
+                    android:layout_marginTop="218dp"
+                    android:gravity="center"
+                    android:hint="이름"
+                    android:text="이름"
+                    android:textColor="#E49653"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rank_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            />
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

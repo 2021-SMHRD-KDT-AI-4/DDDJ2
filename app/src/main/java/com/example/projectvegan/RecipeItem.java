@@ -1,17 +1,42 @@
 package com.example.projectvegan;
 
-public class RecipeItem {
-    String recipeFoodName;
+import java.io.Serializable;
 
-    public RecipeItem(String recipefoodName){
-        this.recipeFoodName = recipefoodName;
+public class RecipeItem implements Serializable {
+    String recipeFoodName;
+    String recipeFoodRc;
+    String recipeFoodIngredient;
+
+    public RecipeItem(String recipeFoodName,String recipeFoodRc,String recipeFoodIngredient)
+    {
+        this.recipeFoodName = recipeFoodName;
+        this.recipeFoodRc = recipeFoodRc;
+        this.recipeFoodIngredient = recipeFoodIngredient;
     }
-    public String getFoodName(){
+
+    public String getRecipeFoodName(){
         return recipeFoodName;
     }
 
-    public void setFoodName(String foodName){
+    public void setRecipeFoodName(String recipeFoodName){
         this.recipeFoodName = recipeFoodName;
     }
+
+    public String getRecipeFoodRc() {
+        return recipeFoodRc;
+    }
+
+    public void setRecipeFoodRc(String recipeFoodRc) {
+        this.recipeFoodRc = recipeFoodRc;
+    }
+
+    public String getRecipeFoodIngredient() {
+        return recipeFoodIngredient;
+    }
+
+    public void setRecipeFoodIngredient(String recipeFoodIngredient) {
+        this.recipeFoodIngredient = recipeFoodIngredient;
+    }
+
 
 }

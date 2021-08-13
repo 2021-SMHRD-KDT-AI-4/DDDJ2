@@ -50,5 +50,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_rc_search_back"
-        tools:listitem="@layout/item_food"/>
+        tools:listitem="@layout/item_recipe"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

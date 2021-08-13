@@ -12,19 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="440dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_tel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="450dp"
         android:layout_marginEnd="275dp"
         android:text="채식 단계"
         android:textColor="#000000"
@@ -32,28 +32,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_tel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_age"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="330dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="나이"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_join" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="340dp"
         android:layout_marginEnd="275dp"
         android:text="나이"
         android:textColor="#000000"
@@ -61,14 +61,14 @@
         app:layout_constraintEnd_toStartOf="@+id/edt_join_tel"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_gender" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="294dp"
         android:layout_marginEnd="275dp"
         android:text="성별"
         android:textColor="#000000"
@@ -76,14 +76,14 @@
         app:layout_constraintEnd_toStartOf="@+id/edt_join_tel"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_pw_check"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="178dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="비밀번호 확인"
@@ -91,28 +91,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_pw" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_tel"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="386dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="-구분없이 입력"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_age" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="395dp"
         android:layout_marginEnd="275dp"
         android:text="휴대폰 번호"
         android:textColor="#000000"
@@ -120,61 +120,61 @@
         app:layout_constraintEnd_toStartOf="@+id/edt_join_tel"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_age" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_join"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="530dp"
         android:layout_marginEnd="210dp"
         android:background="@drawable/img_round_button"
         android:text="회원가입"
         app:layout_constraintEnd_toStartOf="@+id/btn_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_tel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:layout_marginStart="210dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="530dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/img_round_button"
         android:text="취소"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_join"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_tel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_name"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="232dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_pw_check" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="275dp"
         android:text="이름"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/edt_join_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_pw_check" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_id"
@@ -211,52 +211,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="185dp"
         android:layout_marginEnd="275dp"
         android:text="비밀번호 확인"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/edt_join_pw_check"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_pw" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_join_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="130dp"
         android:layout_marginEnd="275dp"
         android:text="비밀번호"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_join_id" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_join_pw"
         android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_id" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/rg_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="285dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_join_name">
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
             android:id="@+id/rb_join_male"
