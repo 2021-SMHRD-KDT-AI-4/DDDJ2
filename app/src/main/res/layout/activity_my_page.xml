@@ -107,7 +107,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/tv_kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -131,7 +131,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_my_kcal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="320dp"
@@ -322,12 +322,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/tv_natrum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="38dp"
-                    android:text="비타민"
+                    android:text="나트륨"
                     android:textColor="#D3BD04"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/textView22"
@@ -341,16 +341,16 @@
                     android:layout_marginTop="43dp"
                     android:background="#BC8E03"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toEndOf="@+id/tv_natrum"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/tv_sugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="38dp"
-                    android:text="나트륨"
+                    android:text="당류"
                     android:textColor="#BC8E03"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/textView24"
@@ -375,11 +375,11 @@
                     android:layout_marginTop="18dp"
                     android:background="#AAB630"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView19"
+                    app:layout_constraintStart_toEndOf="@+id/tv_protein"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/tv_fat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -391,7 +391,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/tv_protein"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -410,7 +410,7 @@
                     android:layout_marginTop="18dp"
                     android:background="#8BC34A"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toEndOf="@+id/tv_carb"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -439,7 +439,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/tv_carb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
