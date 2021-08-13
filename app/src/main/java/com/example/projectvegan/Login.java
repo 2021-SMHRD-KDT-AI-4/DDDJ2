@@ -55,10 +55,14 @@ public class Login extends AppCompatActivity {
 
         btn_login = findViewById(R.id.btn_login);
 
-        String cb_login_id = PreferenceManager.getString(getApplicationContext(),"cb_id");
-        String cb_login_pw = PreferenceManager.getString(getApplicationContext(),"cb_pw");
+        // ----------------------------------------------------------------------
 
-        if(!cb_login_id.equals(PreferenceManager.DEFAULT_STRING)){
+        String cb_login_id = PreferenceManager.getString(getApplicationContext(),"id");
+        String cb_login_pw = PreferenceManager.getString(getApplicationContext(),"pw");
+        Boolean check = PreferenceManager.getBoolean(getApplicationContext(),"Check");
+
+
+        if(!check == (PreferenceManager.DEFAULT_BOOLEAN)){
             edt_login_id.setText(cb_login_id);
             edt_login_pw.setText(cb_login_pw);
             cb_login.setChecked(true);
@@ -85,33 +89,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendRequest();
-                String login_id = edt_login_id.getText().toString();
-                String login_pw = edt_login_pw.getText().toString();
-
-                String info =PreferenceManager.getString(getApplicationContext(),"info");
-
-                try {
-                    JSONObject jsonObject = new JSONObject(info);
-                    String join_id = jsonObject.getString("id");
-                    String join_pw = jsonObject.getString("pw");
-
-                    if(login_id.equals(join_id) && login_pw.equals(join_pw)){
-
-                        if(cb_login.isChecked()) {
-                            PreferenceManager.setString(getApplicationContext(), "cb_id", login_id);
-                            PreferenceManager.setString(getApplicationContext(), "cb_pw", login_pw);
-                        }else{
-                            PreferenceManager.remove(getApplicationContext(),"cb_id");
-                            PreferenceManager.remove(getApplicationContext(),"cb_pw");
-                        }
-                        Intent intent = new Intent(getApplicationContext(),Main.class);
-                        startActivity(intent);
-                    }
-                } catch (JSONException jsonException) {
-                    jsonException.printStackTrace();
-                }
-                Intent intent = new Intent(getApplicationContext(),Main.class);
-                startActivity(intent);
             }
         });
     }
@@ -129,9 +106,14 @@ public class Login extends AppCompatActivity {
                 if(!response.equals("null")){
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String id = jsonObject.getString("id");
+                        PreferenceManager.setString(getApplicationContext(), "id", jsonObject.getString("user_id"));
+                        PreferenceManager.setString(getApplicationContext(), "pw", jsonObject.getString("user_pw"));
+                        PreferenceManager.setString(getApplicationContext(), "name", jsonObject.getString("user_name"));
+                        PreferenceManager.setString(getApplicationContext(), "category", jsonObject.getString("user_category"));
+                        PreferenceManager.setInt(getApplicationContext(), "age", jsonObject.getInt("user_age"));
+                        PreferenceManager.setString(getApplicationContext(), "gender", jsonObject.getString("user_gender"));
+                        PreferenceManager.setString(getApplicationContext(), "tel", jsonObject.getString("user_tel"));
                         Intent intent = new Intent(getApplicationContext(),Main.class);
-                        intent.putExtra("id",id);
                         startActivity(intent);
                         finish();
                     } catch (JSONException e) {

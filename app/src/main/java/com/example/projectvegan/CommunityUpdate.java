@@ -124,7 +124,8 @@ public class CommunityUpdate extends AppCompatActivity {
     // 이미지 서버 저장
     public void sendRequest() {
 
-        String id = PreferenceManager.getString(getApplicationContext(), "cd_id");
+        String id = PreferenceManager.getString(getApplicationContext(), "id");
+        String name = PreferenceManager.getString(getApplicationContext(), "name");
 
         // Voolley Lib 새로운 요청객체 생성
         queue = Volley.newRequestQueue(this);
@@ -180,12 +181,14 @@ public class CommunityUpdate extends AppCompatActivity {
                 params.put("content", edt_com_text.getText().toString());
                 params.put("title", edt_com_title.getText().toString());
                 params.put("a", resizeImg);
+                params.put("name", name);
 
                 return params;
             }
         };
         queue.add(stringRequest);
     } // End sendRequest
+
 
     // 이미지 리사이즈
     private Bitmap resize(Context context, Uri uri, int resize){

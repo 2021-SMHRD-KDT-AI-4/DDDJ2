@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 public class PreferenceManager {
     private static final String FILE_NAME = "myApp";
     public static final String DEFAULT_STRING = "데이터가 없습니다.";
-    private static final boolean DEFAULT_BOOLEAN = false;
-    private static final int DEFAULT_INT = -1;
-    private static final long DEFAULT_LONG = -1L;
-    private static final float DEFAULT_FLOAT = -1F;
+    public static final boolean DEFAULT_BOOLEAN = false;
+    public static final int DEFAULT_INT = -1;
+    public static final long DEFAULT_LONG = -1L;
+    public static final float DEFAULT_FLOAT = -1F;
 
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor editor;
