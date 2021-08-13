@@ -115,10 +115,11 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
     public void sendRequest(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
-        String url = "http://59.0.236.151:8081/AndroidServer/LoginService";
+        String url = "http://211.63.240.58:8081/3rd_project/LoginService";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override
@@ -132,15 +133,13 @@ public class Login extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),Main.class);
                         intent.putExtra("id",id);
                         startActivity(intent);
-
+                        finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }else{
                     Toast.makeText(getApplicationContext(),"로그인 실패..",Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             // 서버와의 연동 에러시 출력
@@ -174,7 +173,6 @@ public class Login extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(stringRequest);
     }
 

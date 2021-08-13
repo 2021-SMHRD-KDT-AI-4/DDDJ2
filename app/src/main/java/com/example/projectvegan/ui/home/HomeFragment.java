@@ -86,7 +86,9 @@ public class HomeFragment extends Fragment {
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getContext(), Community.class);
+                //intent.putExtra(List);
                 startActivity(intent);
             }
         });

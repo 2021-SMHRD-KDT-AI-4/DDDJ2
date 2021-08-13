@@ -45,6 +45,7 @@ public class Join extends AppCompatActivity {
     private RadioButton rb_join_male,rb_join_female;
     private RadioGroup rg_join;
     private RadioButton rb_gender;
+    private Spinner join_cb_level;
 
     private RequestQueue queue;
     private StringRequest stringRequest;
@@ -69,6 +70,8 @@ public class Join extends AppCompatActivity {
         rb_join_male = findViewById(R.id.rb_join_male);
         rb_join_female = findViewById(R.id.rb_join_female);
 
+        join_cb_level = findViewById(R.id.join_cb_level);
+
         btn_join = findViewById(R.id.btn_join);
         btn_back = findViewById(R.id.btn_back);
 
@@ -88,8 +91,15 @@ public class Join extends AppCompatActivity {
         btn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendRequest();
-
+                if ( !edt_join_pw.getText().toString().equals(edt_join_pw_check.getText().toString()) ) {
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
+                    edt_join_pw.setText("");
+                    edt_join_pw_check.setText("");
+                    edt_join_pw.requestFocus();
+                    return;
+                }else{
+                    sendRequest();
+                }
             }
         });
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +113,7 @@ public class Join extends AppCompatActivity {
     public void sendRequest(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
-        String url = "http://59.0.236.151:8081/AndroidServer/JoinService";
+        String url = "http://211.63.240.58:8081/3rd_project/JoinService";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override
@@ -115,16 +125,9 @@ public class Join extends AppCompatActivity {
 //                        Log.v("resultValue",jsonObject.getString("isCheck"));
                     String result = jsonObject.getString("isCheck");
                     if(result.equals("true")){
-                        if ( !edt_join_pw.getText().toString().equals(edt_join_pw_check.getText().toString()) ) {
-                            Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
-                            edt_join_pw.setText("");
-                            edt_join_pw_check.setText("");
-                            edt_join_pw.requestFocus();
-                            return;
-                        }else {
-                            Intent intent = new Intent(getApplicationContext(),Login.class);
-                            startActivity(intent);
-                        }
+                        Intent intent = new Intent(getApplicationContext(),Login.class);
+                        startActivity(intent);
+                        finish();
                     }else{
                         Toast.makeText(getApplicationContext(),"회원가입 실패..",Toast.LENGTH_SHORT).show();
                     }
@@ -160,16 +163,19 @@ public class Join extends AppCompatActivity {
 
                 params.put("id",edt_join_id.getText().toString());
                 params.put("pw",edt_join_pw.getText().toString());
-                params.put("pw_check",edt_join_pw_check.getText().toString());
                 params.put("name",edt_join_name.getText().toString());
-                params.put("gender",rb_gender.getText().toString());
+                if (rb_join_male.isChecked()) {
+                    params.put("gender",rb_join_male.getText().toString());
+                }else if (rb_join_female.isChecked()) {
+                    params.put("gender",rb_join_female.getText().toString());
+                }
                 params.put("age",edt_join_age.getText().toString());
                 params.put("tel",edt_join_tel.getText().toString());
+                params.put("category", join_cb_level.getSelectedItem().toString());
 
                 return params;
             }
         };
-
         queue.add(stringRequest);
     }
     @Override

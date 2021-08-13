@@ -8,8 +8,6 @@ public class CommunityItem {
     private String userEmail;
     private String comTitle;
 
-
-
     private String userText;
 
     public CommunityItem(int userIcon,  String userName, String userEmail, String comTitle, int comImg, String userText) {

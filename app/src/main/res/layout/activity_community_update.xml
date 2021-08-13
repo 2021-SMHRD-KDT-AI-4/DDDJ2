@@ -11,8 +11,8 @@
         android:id="@+id/btn_com_cancel"
         android:layout_width="82dp"
         android:layout_height="42dp"
-        android:layout_marginStart="284dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="576dp"
         android:background="@drawable/img_round_button"
         android:text="취소"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,20 +22,10 @@
         android:id="@+id/btn_com_check"
         android:layout_width="82dp"
         android:layout_height="42dp"
-        android:layout_marginStart="196dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="576dp"
         android:background="@drawable/img_round_button"
         android:text="등록"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_com_img"
-        android:layout_width="84dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="276dp"
-        android:layout_marginTop="148dp"
-        android:text="파일 등록"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,8 +37,8 @@
         android:layout_marginTop="72dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
+        android:hint="제목"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,8 +47,8 @@
         android:id="@+id/edt_com_text"
         android:layout_width="339dp"
         android:layout_height="251dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="296dp"
         android:background="@drawable/com_text_img"
         android:ems="10"
         android:gravity="top|left"
@@ -68,13 +58,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_src_img"
-        android:layout_width="108dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="148dp"
-        android:gravity="center|left"
-        app:layout_constraintEnd_toStartOf="@+id/btn_com_img"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="142dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_com_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

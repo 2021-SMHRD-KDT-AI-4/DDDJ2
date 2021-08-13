@@ -54,6 +54,7 @@ public class Community extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),CommunityUpdate.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
