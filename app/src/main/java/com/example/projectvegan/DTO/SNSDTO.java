@@ -12,6 +12,14 @@ public class SNSDTO implements Serializable {
     private String user_name;
 
 
+    public SNSDTO(String user_id, String sns_title, String sns_content, String sns_img, String user_name) {
+        this.user_id = user_id;
+        this.sns_title = sns_title;
+        this.sns_content = sns_content;
+        this.sns_img = sns_img;
+        this.user_name = user_name;
+    }
+
     public SNSDTO(int sns_code, String user_id, String sns_title, String sns_content, String sns_img, String user_name) {
         this.sns_code = sns_code;
         this.user_id = user_id;

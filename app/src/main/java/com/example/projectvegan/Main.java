@@ -112,6 +112,22 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        btn_nav_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferenceManager.remove(getApplicationContext(), "id");
+                PreferenceManager.remove(getApplicationContext(), "pw");
+                PreferenceManager.remove(getApplicationContext(), "name");
+                PreferenceManager.remove(getApplicationContext(), "category");
+                PreferenceManager.remove(getApplicationContext(), "age");
+                PreferenceManager.remove(getApplicationContext(), "gender");
+                PreferenceManager.remove(getApplicationContext(), "tel");
+                Intent intent = new Intent(getApplicationContext(), Main.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)

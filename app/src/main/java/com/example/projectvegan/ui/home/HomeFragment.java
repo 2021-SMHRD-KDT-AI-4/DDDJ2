@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
 
     public void sendRequest(){
 
-        ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
+        ArrayList<SNSDTO> snsList = new ArrayList<>();
 
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
