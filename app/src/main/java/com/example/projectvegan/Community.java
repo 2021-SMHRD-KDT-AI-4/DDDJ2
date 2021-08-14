@@ -43,6 +43,10 @@ public class Community extends AppCompatActivity {
     private RequestQueue queue;
     private StringRequest stringRequest;
 
+
+    private ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +88,7 @@ public class Community extends AppCompatActivity {
     private void settingList(){
 
         Intent intent = getIntent();
-        ArrayList<SNSDTO> snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
+        snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
 
         for (int i = 0; i < snsList.size(); i++) {
             communityItemsArrayList.add(

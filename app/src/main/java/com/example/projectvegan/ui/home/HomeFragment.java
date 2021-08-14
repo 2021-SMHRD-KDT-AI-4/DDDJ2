@@ -32,6 +32,7 @@ import com.example.projectvegan.PreferenceManager;
 import com.example.projectvegan.Quiz;
 import com.example.projectvegan.R;
 import com.example.projectvegan.Rank;
+import com.example.projectvegan.RankItem;
 import com.example.projectvegan.Recipe;
 import com.example.projectvegan.RecipeItem;
 import com.example.projectvegan.Scanner;
@@ -56,8 +57,9 @@ public class HomeFragment extends Fragment {
     private RequestQueue queue;
     private StringRequest stringRequest;
 
+    private ArrayList<RankItem> rankList;
     private ArrayList<SNSDTO> snsList;
-    ArrayList<RecipeItem> recipeList;
+    private ArrayList<RecipeItem> recipeList;
 
     private int[] quizs = {R.drawable.quizimg1,R.drawable.quizimg2,R.drawable.quizimg3,R.drawable.quiz_img};
     private String[] title = {"맥주는 비건 음식일까요","채식을 하는 것이 환경에 도움이 될까요?","소고기 1Kg 생산하는데 배출되는 이산화탄소 양은?",
@@ -139,8 +141,7 @@ public class HomeFragment extends Fragment {
         btn_rank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Rank.class);
-                startActivity(intent);
+                rankSendRequest();
             }
         });
         btn_sns.setOnClickListener(new View.OnClickListener() {
@@ -151,11 +152,77 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
+    public void rankSendRequest(){
+
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url = "http://211.63.240.58:8081/3rd_project/RankService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+
+                if(!response.equals("null")){
+                    try {
+                        // JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = new JSONArray(response);
+
+                        for (int i = 0; i< jsonArray.length(); i++) {
+                            String user_id = jsonArray.getJSONObject(i).getString("user_id");
+                            String user_name = jsonArray.getJSONObject(i).getString("user_name");
+                            int user_point = jsonArray.getJSONObject(i).getInt("user_point");
+
+                            RankItem rankItem = new RankItem(user_id,user_name,user_point);
+                            rankList.add(rankItem);
+                        }
+
+                        Intent intent = new Intent(getContext(),Rank.class);
+                        intent.putExtra("rankList", rankList);
+                        startActivity(intent);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "오류!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
 
 
     public void recipeSendRequest(){
-
-
 
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());

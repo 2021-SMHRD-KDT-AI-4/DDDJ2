@@ -24,6 +24,10 @@ public class Recipe extends AppCompatActivity {
     private ArrayList<RecipeItem> recipeFoodItemArrayList, rFilteredList;
     RecipeAdapter recipeAdapter;
     LinearLayoutManager linearLayoutManager;
+
+    Intent intent = getIntent();
+    ArrayList<RecipeItem> recipeList = (ArrayList<RecipeItem>) intent.getSerializableExtra("recipeList");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,8 +84,8 @@ public class Recipe extends AppCompatActivity {
 
     private void settingList(){
 
-        Intent intent = getIntent();
-        ArrayList<RecipeItem> recipeList = (ArrayList<RecipeItem>) intent.getSerializableExtra("recipeList");
+//        Intent intent = getIntent();
+//        ArrayList<RecipeItem> recipeList = (ArrayList<RecipeItem>) intent.getSerializableExtra("recipeList");
 
         for (int i = 0; i < recipeList.size(); i++) {
             recipeFoodItemArrayList.add(
