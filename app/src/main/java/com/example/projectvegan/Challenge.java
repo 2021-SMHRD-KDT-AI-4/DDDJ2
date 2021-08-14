@@ -49,7 +49,6 @@ public class Challenge extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Notice.class));
             }
         });
-
         btn_ex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -56,6 +56,9 @@ public class HomeFragment extends Fragment {
     private RequestQueue queue;
     private StringRequest stringRequest;
 
+    private ArrayList<SNSDTO> snsList;
+    ArrayList<RecipeItem> recipeList;
+
     private int[] quizs = {R.drawable.quizimg1,R.drawable.quizimg2,R.drawable.quizimg3,R.drawable.quiz_img};
     private String[] title = {"맥주는 비건 음식일까요","채식을 하는 것이 환경에 도움이 될까요?","소고기 1Kg 생산하는데 배출되는 이산화탄소 양은?",
                             "한국 오레오는 비건 음식일까요?"};
@@ -152,7 +155,7 @@ public class HomeFragment extends Fragment {
 
     public void recipeSendRequest(){
 
-        ArrayList<RecipeItem> recipeList = new ArrayList<>();
+
 
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -223,8 +226,6 @@ public class HomeFragment extends Fragment {
 
     public void SNSsendRequest(){
 
-        ArrayList<SNSDTO> snsList = new ArrayList<>();
-
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         String url = "http://211.63.240.58:8081/3rd_project/ViewService";
@@ -238,6 +239,7 @@ public class HomeFragment extends Fragment {
                     try {
                         // JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = new JSONArray(response);
+
                         for (int i = 0; i< jsonArray.length(); i++) {
                             int sns_code = jsonArray.getJSONObject(i).getInt("sns_code");
                             String user_id = jsonArray.getJSONObject(i).getString("user_id");
