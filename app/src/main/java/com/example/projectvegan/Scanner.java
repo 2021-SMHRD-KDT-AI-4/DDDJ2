@@ -56,14 +56,9 @@ import com.google.api.services.vision.v1.model.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 
 
 public class Scanner extends AppCompatActivity {
@@ -252,54 +247,13 @@ public class Scanner extends AppCompatActivity {
         return annotateRequest;
     }
 
-    private class LableDetectionTask extends AsyncTask<Object, Void, String> {
+    private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<Scanner> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
 
         LableDetectionTask(Scanner activity, Vision.Images.Annotate annotate) {
             mActivityWeakReference = new WeakReference<>(activity);
             mRequest = annotate;
-        }
-        ArrayList<String> contentslist = new ArrayList<>();
-        public ArrayList<String> readExcel(String result ,String type){
-            try {
-                InputStream is =getBaseContext().getResources().getAssets().open(type+".xls");
-
-                Workbook wb = Workbook.getWorkbook(is);
-
-                if(wb!= null){
-                    Sheet sheet = wb.getSheet(0); //시트 불러오기
-                    if(sheet!=null){
-
-                        int colTotal = sheet.getColumns();
-                        int rowIndexStart =0;
-                        int rowTotal = sheet.getColumn(colTotal-1).length;
-
-                        StringBuilder sb;
-                        for(int row=rowIndexStart; row<rowTotal; row++){
-                            sb=new StringBuilder();
-
-                            //col :컬럼순서, contents: 데이터값
-                            int col =0;
-
-                            String contents = sheet.getCell(col,row).getContents();
-                            if (result.indexOf(contents)>0){
-                                contentslist.add(contents);
-
-
-                            }
-
-                        }
-                    }
-
-                }
-
-
-            } catch (IOException | BiffException e) {
-                e.printStackTrace();
-            }
-
-            return contentslist;
         }
 
         @Override
@@ -319,11 +273,8 @@ public class Scanner extends AppCompatActivity {
         }
 //출력
         protected void onPostExecute(String result) {
-            String type = PreferenceManager.getString(Scanner.this,"category");
+
             Log.v("result",result);
-            ArrayList<String> contentslist = readExcel(result,type);
-            Log.v("주의성분","타입:"+type+contentslist+"");
-            Toast.makeText(getApplicationContext(),"주의성분"+contentslist+"",Toast.LENGTH_SHORT).show();
         }
     }
 
