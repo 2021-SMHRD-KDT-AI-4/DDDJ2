@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,13 +15,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Calendar;
+import java.util.Map;
 
 public class DiaryCalendar extends AppCompatActivity {
     private GridView gv_calendar;
@@ -29,6 +48,10 @@ public class DiaryCalendar extends AppCompatActivity {
     private ArrayList<String> day_list;
 
     private Calendar mCal;
+
+    private RequestQueue queue;
+    private StringRequest stringRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +84,7 @@ public class DiaryCalendar extends AppCompatActivity {
         day_list.add("토");
 
         mCal = Calendar.getInstance();
+
 
         // 이번달 1일 무슨 요일인지 판단
         mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date))-1,1);
@@ -141,8 +165,7 @@ public class DiaryCalendar extends AppCompatActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
-                        startActivity(intent);
+                        sendRequest();
                     }
                 });
             }
@@ -152,6 +175,70 @@ public class DiaryCalendar extends AppCompatActivity {
 
     private class ViewHolder {
         TextView tvItemGridView;
+    }
+
+    public void sendRequest(){
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(this);
+        String url = "http://211.63.240.58:8081/3rd_project/LoginService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+
+                if(!response.equals("null")){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        PreferenceManager.setString(getApplicationContext(), "id", jsonObject.getString("user_id"));
+                        PreferenceManager.setString(getApplicationContext(), "pw", jsonObject.getString("user_pw"));
+                        PreferenceManager.setString(getApplicationContext(), "name", jsonObject.getString("user_name"));
+                        PreferenceManager.setString(getApplicationContext(), "category", jsonObject.getString("user_category"));
+                        PreferenceManager.setInt(getApplicationContext(), "age", jsonObject.getInt("user_age"));
+                        PreferenceManager.setString(getApplicationContext(), "gender", jsonObject.getString("user_gender"));
+                        PreferenceManager.setString(getApplicationContext(), "tel", jsonObject.getString("user_tel"));
+                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
+
+
+                        startActivity(intent);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"로그인 실패..",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     @Override

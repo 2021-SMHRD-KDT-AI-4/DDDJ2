@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="44dp"
                         android:layout_marginTop="232dp"
-                        android:text="오레오는 비건일까요?"
+                        android:text="한국 오레오는 비건 음식일까요?"
                         android:textColor="#272727"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -46,7 +46,7 @@ public class MyPage extends AppCompatActivity {
                                  Color.rgb(170,182,48),Color.rgb(211,189,4),
                                  Color.rgb(188,141,3)};
 
-    private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date,
+    private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date,tv_my_id,
             tv_kcal,tv_my_kcal,tv_protein,tv_natrum,tv_fat,tv_sugar,tv_carb,
             tv_my_level_title,tv_my_name;
     private ProgressBar pg_kcal;
@@ -88,6 +88,7 @@ public class MyPage extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         tv_my_level_title = findViewById(R.id.tv_my_level_title);
+        tv_my_id = findViewById(R.id.tv_my_id);
         tv_my_name = findViewById(R.id.tv_my_name);
 
         tv_breakfast = findViewById(R.id.tv_breakfast);
@@ -101,6 +102,7 @@ public class MyPage extends AppCompatActivity {
         tv_fat = findViewById(R.id.tv_fat);
         tv_natrum = findViewById(R.id.tv_natrum);
         tv_sugar = findViewById(R.id.tv_sugar);
+        tv_kcal = findViewById(R.id.tv_kcal);
 
 
         pg_kcal = findViewById(R.id.pg_kcal);
@@ -112,16 +114,17 @@ public class MyPage extends AppCompatActivity {
 
         // 받아온 값
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
-        pw = intent.getStringExtra("pw");
-        int age = Integer.parseInt(intent.getStringExtra("age"));
-        String name = intent.getStringExtra("name");
-        String gender = intent.getStringExtra("gender");
-        String category = intent.getStringExtra("category");
+        id = intent.getStringExtra("user_id");
+        pw = intent.getStringExtra("user_pw");
+        int age = intent.getIntExtra("user_age",0);
+        String name = intent.getStringExtra("user_name");
+        String gender = intent.getStringExtra("user_gender");
+        String category = intent.getStringExtra("user_category");
 
 
         tv_my_level_title.setText(category);
         tv_my_name.setText(name);
+        tv_my_id.setText(id);
 
         // 영양소 정보
         if (age>=10 && age<30 && gender.equals("남")){
@@ -362,9 +365,9 @@ public class MyPage extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("id",id);
-                params.put("pw",pw);
-                params.put("date",tv_my_cal_date.getText().toString());
+                params.put("user_id",id);
+                params.put("user_pw",pw);
+                params.put("pick_date",tv_my_cal_date.getText().toString());
 
                 return params;
             }
@@ -420,8 +423,8 @@ public class MyPage extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 //오늘의 데이터
-                params.put("id",id);
-                params.put("date",today);
+                params.put("user_id",id);
+                params.put("today_date",today);
                 params.put("breakfast",String.valueOf(breakfast));
                 params.put("lunch",String.valueOf(lunch));
                 params.put("dinner",String.valueOf(dinner));

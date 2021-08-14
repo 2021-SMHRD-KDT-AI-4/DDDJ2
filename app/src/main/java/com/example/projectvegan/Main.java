@@ -13,8 +13,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.projectvegan.databinding.NavHeaderMainBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -32,11 +43,16 @@ import com.example.projectvegan.databinding.ActivityMainBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private int[] imgs = {R.drawable.tree1,R.drawable.tree2,R.drawable.tree3};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +121,6 @@ public class Main extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
-
-
 
     @Override
     public boolean onSupportNavigateUp() {

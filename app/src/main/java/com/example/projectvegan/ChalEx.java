@@ -53,6 +53,7 @@ public class ChalEx extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent();
                         setResult(RESULT_CANCELED,intent);
+                        finish();
                     }
                 });
                 builder.setNegativeButton("아니오",  null);
