@@ -87,7 +87,8 @@ public class Community extends AppCompatActivity {
         ArrayList<SNSDTO> snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
 
         for (int i = 0; i < snsList.size(); i++) {
-            communityItemsArrayList.add(new SNSDTO(
+            communityItemsArrayList.add(
+                    new SNSDTO(
                     snsList.get(i).getSns_code(),
                     snsList.get(i).getUser_id(),
                     snsList.get(i).getSns_title(),

@@ -33,6 +33,7 @@ import com.example.projectvegan.Quiz;
 import com.example.projectvegan.R;
 import com.example.projectvegan.Rank;
 import com.example.projectvegan.Recipe;
+import com.example.projectvegan.RecipeItem;
 import com.example.projectvegan.Scanner;
 import com.example.projectvegan.databinding.FragmentHomeBinding;
 
@@ -48,6 +49,9 @@ import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
+
+    private RecipeItem recipeItem = null;
+    private ArrayList<RecipeItem> recipeFoodItemArrayList;
     private FragmentHomeBinding binding;
     private RequestQueue queue;
     private StringRequest stringRequest;
@@ -58,6 +62,7 @@ public class HomeFragment extends Fragment {
 
     Random r = new Random();
 
+    private String user_cat = null;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -73,6 +78,8 @@ public class HomeFragment extends Fragment {
         final TextView tv_main_quiz_title = binding.tvMainQuizTitle;
         final ImageView img_main_recipe = binding.imgMainRecipe;
         final ImageView img_main_quiz = binding.imgMainQuiz;
+
+        user_cat = PreferenceManager.getString(getContext(), "category");
 
         int random = r.nextInt(4);
 
@@ -90,8 +97,7 @@ public class HomeFragment extends Fragment {
         img_main_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Recipe.class);
-                startActivity(intent);
+                recipeSendRequest();
             }
         });
 
@@ -146,11 +152,11 @@ public class HomeFragment extends Fragment {
 
     public void recipeSendRequest(){
 
-        ArrayList<SNSDTO> snsList = new ArrayList<>();
+        ArrayList<RecipeItem> recipeList = new ArrayList<>();
 
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url = "http://211.63.240.58:8081/3rd_project/ViewService";
+        String url = "http://211.63.240.58:8081/3rd_project/SearchService";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override
@@ -162,19 +168,16 @@ public class HomeFragment extends Fragment {
                         // JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i = 0; i< jsonArray.length(); i++) {
-                            int sns_code = jsonArray.getJSONObject(i).getInt("sns_code");
-                            String user_id = jsonArray.getJSONObject(i).getString("user_id");
-                            String sns_title = jsonArray.getJSONObject(i).getString("sns_title");
-                            String sns_content = jsonArray.getJSONObject(i).getString("sns_content");
-                            String sns_img = jsonArray.getJSONObject(i).getString("sns_img");
-                            String user_name = jsonArray.getJSONObject(i).getString("user_name");
+                            String recipe_title = jsonArray.getJSONObject(i).getString("recipe_title");
+                            String recipe_content = jsonArray.getJSONObject(i).getString("recipe_content");
+                            String recipe_ingredient = jsonArray.getJSONObject(i).getString("recipe_ingredient");
 
-                            SNSDTO snsdto = new SNSDTO(sns_code,user_id,sns_title,sns_content, sns_img, user_name);
-                            snsList.add(snsdto);
+                            recipeItem = new RecipeItem(recipe_title,recipe_content,recipe_ingredient);
+                            recipeList.add(recipeItem);
                         }
 
-                        Intent intent = new Intent(getContext(),Community.class);
-                        intent.putExtra("snsList", snsList);
+                        Intent intent = new Intent(getContext(),Recipe.class);
+                        intent.putExtra("recipeList", recipeList);
                         startActivity(intent);
 
                     } catch (JSONException e) {
@@ -210,6 +213,7 @@ public class HomeFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                params.put("usercat", user_cat);
                 return params;
             }
         };

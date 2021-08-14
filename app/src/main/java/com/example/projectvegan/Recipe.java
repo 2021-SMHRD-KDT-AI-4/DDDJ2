@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.projectvegan.DTO.SNSDTO;
+
 import java.util.ArrayList;
 
 public class Recipe extends AppCompatActivity {
@@ -77,9 +79,21 @@ public class Recipe extends AppCompatActivity {
     }
 
     private void settingList(){
-        recipeFoodItemArrayList.add(new RecipeItem("피자","맛있다","치즈"));
-        recipeFoodItemArrayList.add(new RecipeItem("햄버거","맛있다","빵"));
-        recipeFoodItemArrayList.add(new RecipeItem("피자치킨햄버거","맛있다","뭐냐"));
+
+        Intent intent = getIntent();
+        ArrayList<RecipeItem> recipeList = (ArrayList<RecipeItem>) intent.getSerializableExtra("recipeList");
+
+        for (int i = 0; i < recipeList.size(); i++) {
+            recipeFoodItemArrayList.add(
+                    new RecipeItem(
+                            recipeList.get(i).getRecipeFoodName(),
+                            recipeList.get(i).getRecipeFoodRc(),
+                            recipeList.get(i).getRecipeFoodIngredient()
+            ));
+        }
+//        recipeFoodItemArrayList.add(new RecipeItem("피자","맛있다","치즈"));
+//        recipeFoodItemArrayList.add(new RecipeItem("햄버거","맛있다","빵"));
+//        recipeFoodItemArrayList.add(new RecipeItem("피자치킨햄버거","맛있다","뭐냐"));
 
         recipeAdapter.notifyDataSetChanged();
     }
