@@ -87,13 +87,14 @@ public class Community extends AppCompatActivity {
         ArrayList<SNSDTO> snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
 
         for (int i = 0; i < snsList.size(); i++) {
-            communityItemsArrayList.add(new SNSDTO(snsList.get(i).getSns_code(),
+            communityItemsArrayList.add(new SNSDTO(
+                    snsList.get(i).getSns_code(),
                     snsList.get(i).getUser_id(),
                     snsList.get(i).getSns_title(),
                     snsList.get(i).getSns_content(),
                     snsList.get(i).getSns_img(),
-                    snsList.get(i).getUser_name()
-                    ));
+                    snsList.get(i).getUser_name())
+            );
         }
 //        communityItemsArrayList.add(new CommunityItem(R.drawable.basic,"나","qwer1@naver.com","집에가자!",R.drawable.quizimg1,"이제 집에 가이지"));
 //        communityItemsArrayList.add(new CommunityItem(R.drawable.basic,"너","qwer2@naver.com","가자!",R.drawable.quizimg2,"프로젝트 그만!!!"));
@@ -101,8 +102,6 @@ public class Community extends AppCompatActivity {
 
         communityAdapter.notifyDataSetChanged();
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

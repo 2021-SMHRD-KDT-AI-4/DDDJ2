@@ -1,6 +1,7 @@
 package com.example.projectvegan;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -174,11 +177,13 @@ public class CommunityUpdate extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                String name = PreferenceManager.getString(getApplicationContext(), "name");
+
                 params.put("id", PreferenceManager.getString(getApplicationContext(), "id"));
                 params.put("content", edt_com_text.getText().toString());
                 params.put("title", edt_com_title.getText().toString());
                 params.put("a", resizeImg);
-                params.put("name", PreferenceManager.getString(getApplicationContext(), "name"));
+                params.put("name", name);
 
                 return params;
             }
@@ -243,11 +248,27 @@ public class CommunityUpdate extends AppCompatActivity {
     } // End Permission
 
 
+    // OnClickEvent
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-
-
-
-
+        if (requestCode == 812 & resultCode == RESULT_OK) {
+            try {
+                uri = data.getData();
+                InputStream in = getContentResolver().openInputStream(data.getData());
+                Bitmap bitmap = BitmapFactory.decodeStream(in);
+                in.close();
+                imgView.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (resultCode == RESULT_CANCELED) {
+            // 이미지 선택 취소했을 때
+        }
+    } // End OnActivityResult
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

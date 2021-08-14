@@ -150,6 +150,7 @@ public class HomeFragment extends Fragment {
                         Intent intent = new Intent(getContext(),Community.class);
                         intent.putExtra("snsList", snsList);
                         startActivity(intent);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -188,8 +189,6 @@ public class HomeFragment extends Fragment {
         };
         queue.add(stringRequest);
     }
-
-
 
     @Override
     public void onDestroyView() {
