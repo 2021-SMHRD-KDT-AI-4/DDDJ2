@@ -85,6 +85,8 @@ public class SearchItem extends AppCompatActivity {
         rv_search_item.addItemDecoration(dividerItemDecoration);
 
         settingList();
+        filteredList.clear();
+        foodAdapter.filterList(filteredList);
 
         foodItemArrayList.addAll(filteredList);
 
@@ -101,8 +103,6 @@ public class SearchItem extends AppCompatActivity {
             public void onClick(View v) {
                 if(foodCheck.isChecked()){
                     sendRequest();
-                }else{
-
                 }
             }
         });
@@ -111,7 +111,7 @@ public class SearchItem extends AppCompatActivity {
     public void search(String searchText){
         filteredList.clear();
         // 리스트의 모든 데이터를 검색한다.
-        for(int i = 0;i < foodItemArrayList.size(); i++)
+        for(int i = 0; i < foodItemArrayList.size(); i++)
         {
             // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
             if (foodItemArrayList.get(i).getFoodName().toLowerCase().contains(searchText.toLowerCase()))
@@ -124,10 +124,15 @@ public class SearchItem extends AppCompatActivity {
     }
 
     private void settingList(){
-        foodItemArrayList.add(new FoodItem("피자"));
-        foodAdapter.notifyDataSetChanged();
 
+        foodItemArrayList.add(new FoodItem("피자"));
+        foodItemArrayList.add(new FoodItem("치킨"));
+        foodItemArrayList.add(new FoodItem("햄버거"));
+
+
+        foodAdapter.notifyDataSetChanged();
     }
+
     public void sendRequest(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);

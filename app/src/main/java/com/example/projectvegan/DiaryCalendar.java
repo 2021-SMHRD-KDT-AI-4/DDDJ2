@@ -52,6 +52,14 @@ public class DiaryCalendar extends AppCompatActivity {
     private RequestQueue queue;
     private StringRequest stringRequest;
 
+    private String id = "";
+    private String name = "";
+    private String category = "";
+    private int age = 0;
+    private String gender = "";
+    private int point = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +93,6 @@ public class DiaryCalendar extends AppCompatActivity {
 
         mCal = Calendar.getInstance();
 
-
         // 이번달 1일 무슨 요일인지 판단
         mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date))-1,1);
         int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
@@ -98,8 +105,13 @@ public class DiaryCalendar extends AppCompatActivity {
         gridAdapter = new GridAdapter(getApplicationContext(),day_list);
         gv_calendar.setAdapter(gridAdapter);
 
-
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra("user_id");
+        name = intent.getStringExtra("user_name");
+        category = intent.getStringExtra("user_category");
+        age = intent.getIntExtra("user_age",0);
+        gender = intent.getStringExtra("user_gender");
+        point = intent.getIntExtra("user_point",0);
     }
 
     // 해당 월 일 수 계산
@@ -165,7 +177,16 @@ public class DiaryCalendar extends AppCompatActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendRequest();
+                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                        intent.putExtra("user_id",id);
+                        intent.putExtra("user_name",name);
+                        intent.putExtra("user_category",category);
+                        intent.putExtra("user_age",age);
+                        intent.putExtra("user_gender",gender);
+                        intent.putExtra("user_point",point);
+
+//                        intent.putExtra("date",today);
+                        startActivity(intent);
                     }
                 });
             }
@@ -177,10 +198,10 @@ public class DiaryCalendar extends AppCompatActivity {
         TextView tvItemGridView;
     }
 
-    public void sendRequest(){
+    /*public void sendRequest(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
-        String url = "http://211.63.240.58:8081/3rd_project/LoginService";
+        String url = "http://211.63.240.58:8081/3rd_project/Diary";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override
@@ -239,7 +260,7 @@ public class DiaryCalendar extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -49,6 +49,7 @@ public class MyPage extends AppCompatActivity {
     private TextView tv_breakfast,tv_lunch,tv_dinner,tv_my_cal_date,tv_my_id,
             tv_kcal,tv_my_kcal,tv_protein,tv_natrum,tv_fat,tv_sugar,tv_carb,
             tv_my_level_title,tv_my_name;
+
     private ProgressBar pg_kcal;
 
     private ImageView edit_info;
@@ -56,17 +57,13 @@ public class MyPage extends AppCompatActivity {
 
 
     //영양 정보 초기값
-    private float carbohydrate = 0;
-    private float protein = 0;
-    private float fat = 0;
-    private float natrum = 0;
-    private float sugar = 0;
-    int kcal = 0;
-    int progress = 0;
-    int max_kcal=0;
+    private float carbohydrate,protein,fat,natrum,sugar = 0;
+    int kcal,progress,max_kcal = 0;
 
-    private String id = null;
-    private String pw = null;
+
+    // 회원 정보
+    private String id,name,gender,category = null;
+    int age = 0;
 
     private int breakfast,lunch,dinner = 0;
 
@@ -104,7 +101,6 @@ public class MyPage extends AppCompatActivity {
         tv_sugar = findViewById(R.id.tv_sugar);
         tv_kcal = findViewById(R.id.tv_kcal);
 
-
         pg_kcal = findViewById(R.id.pg_kcal);
 
         tv_my_cal_date = findViewById(R.id.tv_my_cal_date);
@@ -115,16 +111,18 @@ public class MyPage extends AppCompatActivity {
         // 받아온 값
         Intent intent = getIntent();
         id = intent.getStringExtra("user_id");
-        pw = intent.getStringExtra("user_pw");
-        int age = intent.getIntExtra("user_age",0);
-        String name = intent.getStringExtra("user_name");
-        String gender = intent.getStringExtra("user_gender");
-        String category = intent.getStringExtra("user_category");
+        age = intent.getIntExtra("user_age",0);
+        name = intent.getStringExtra("user_name");
+        gender = intent.getStringExtra("user_gender");
+        category = intent.getStringExtra("user_category");
 
 
         tv_my_level_title.setText(category);
         tv_my_name.setText(name);
         tv_my_id.setText(id);
+        pg_kcal.setProgress(progress);
+        tv_my_kcal.setText(progress+"");
+
 
         // 영양소 정보
         if (age>=10 && age<30 && gender.equals("남")){
@@ -181,16 +179,14 @@ public class MyPage extends AppCompatActivity {
         tv_breakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_my_cal_date.equals(today)){
+                if (tv_my_cal_date.getText().toString().equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivityForResult(intent,1000);
-                    tv_breakfast.setText("섭취완료");
+                    startActivityForResult(intent,1001);
 
                     //저장 값
                     breakfast = kcal;
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
-
                 }
             }
         });
@@ -199,10 +195,9 @@ public class MyPage extends AppCompatActivity {
         tv_lunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_my_cal_date.equals(today)){
+                if (tv_my_cal_date.getText().toString().equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivityForResult(intent,1000);
-                    tv_lunch.setText("섭취완료");
+                    startActivityForResult(intent,1002);
 
                     //저장 값
                     lunch = kcal;
@@ -217,10 +212,9 @@ public class MyPage extends AppCompatActivity {
         tv_dinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_my_cal_date.equals(today)){
+                if (tv_my_cal_date.getText().toString().equals(today)){
                     Intent intent = new Intent(getApplicationContext(),SearchItem.class);
-                    startActivityForResult(intent,1000);
-                    tv_dinner.setText("섭취완료");
+                    startActivityForResult(intent,1003);
 
                     //저장 값
                     dinner = kcal;
@@ -366,7 +360,6 @@ public class MyPage extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("user_id",id);
-                params.put("user_pw",pw);
                 params.put("pick_date",tv_my_cal_date.getText().toString());
 
                 return params;
@@ -443,8 +436,7 @@ public class MyPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0 && resultCode == RESULT_OK){
-
+        if(requestCode==1001 && resultCode == RESULT_OK) {
             // 영양소 계산
             carbohydrate += Float.parseFloat(data.getStringExtra("carbohydrate"));
             protein += Float.parseFloat(data.getStringExtra("protein"));
@@ -452,9 +444,26 @@ public class MyPage extends AppCompatActivity {
             natrum += Float.parseFloat(data.getStringExtra("natrum"));
             sugar += Float.parseFloat(data.getStringExtra("sugar"));
             kcal += Integer.parseInt(data.getStringExtra("kcal"));
-
             progress += kcal;
-
+            tv_breakfast.setText("섭취완료");
+        }else if(requestCode==1002 && resultCode == RESULT_OK){
+            carbohydrate += Float.parseFloat(data.getStringExtra("carbohydrate"));
+            protein += Float.parseFloat(data.getStringExtra("protein"));
+            fat += Float.parseFloat(data.getStringExtra("fat"));
+            natrum += Float.parseFloat(data.getStringExtra("natrum"));
+            sugar += Float.parseFloat(data.getStringExtra("sugar"));
+            kcal += Integer.parseInt(data.getStringExtra("kcal"));
+            progress += kcal;
+            tv_lunch.setText("섭취완료");
+        }else if(requestCode==1003 && resultCode == RESULT_OK){
+            carbohydrate += Float.parseFloat(data.getStringExtra("carbohydrate"));
+            protein += Float.parseFloat(data.getStringExtra("protein"));
+            fat += Float.parseFloat(data.getStringExtra("fat"));
+            natrum += Float.parseFloat(data.getStringExtra("natrum"));
+            sugar += Float.parseFloat(data.getStringExtra("sugar"));
+            kcal += Integer.parseInt(data.getStringExtra("kcal"));
+            progress += kcal;
+            tv_dinner.setText("섭취완료");
         }
     }
 

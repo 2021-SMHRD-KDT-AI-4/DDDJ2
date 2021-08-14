@@ -79,7 +79,7 @@ public class EditMyInfo extends AppCompatActivity {
     public void sendRequest(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
-        String url = "http://211.63.240.58:8081/3rd_project/UploadService";
+        String url = "http://211.63.240.58:8081/3rd_project/UpdateService";
         stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override

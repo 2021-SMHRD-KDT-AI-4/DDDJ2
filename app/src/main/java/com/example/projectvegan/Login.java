@@ -113,6 +113,8 @@ public class Login extends AppCompatActivity {
                         PreferenceManager.setInt(getApplicationContext(), "age", jsonObject.getInt("user_age"));
                         PreferenceManager.setString(getApplicationContext(), "gender", jsonObject.getString("user_gender"));
                         PreferenceManager.setString(getApplicationContext(), "tel", jsonObject.getString("user_tel"));
+                        PreferenceManager.setString(getApplicationContext(), "tel", jsonObject.getString("user_point"));
+
                         Intent intent = new Intent(getApplicationContext(),Main.class);
 
 

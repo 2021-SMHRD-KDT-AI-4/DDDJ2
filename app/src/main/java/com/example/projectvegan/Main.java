@@ -88,6 +88,12 @@ public class Main extends AppCompatActivity {
         ImageView img_tree = (ImageView)nav_header_view.findViewById(R.id.img_tree);
 
         String id = PreferenceManager.getString(getApplicationContext(), "id");
+        String name = PreferenceManager.getString(getApplicationContext(), "name");
+        String category = PreferenceManager.getString(getApplicationContext(), "category");
+        int age = PreferenceManager.getInt(getApplicationContext(), "age");
+        String gender = PreferenceManager.getString(getApplicationContext(), "gender");
+        int point = PreferenceManager.getInt(getApplicationContext(),"point");
+
 
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);
@@ -95,12 +101,20 @@ public class Main extends AppCompatActivity {
             tv_poing.setVisibility(View.INVISIBLE);
             img_tree.setVisibility(View.INVISIBLE);
         }else{
+            if(point >= 1000){
+                img_tree.setImageResource(imgs[2]);
+            }else if(point >=500){
+                img_tree.setImageResource(imgs[1]);
+            }else if(point >=0){
+                img_tree.setImageResource(imgs[0]);
+            }
             btn_nav_logout.setVisibility(View.VISIBLE);
             btn_nav_mypage.setVisibility(View.VISIBLE);
             tv_poing.setVisibility(View.VISIBLE);
             img_tree.setVisibility(View.VISIBLE);
             tv_nav_login.setText(PreferenceManager.getString(getApplicationContext(), "name"));
             tv_nav_subtitle.setText(PreferenceManager.getString(getApplicationContext(), "id"));
+            tv_poing.setText("포인트 : "+PreferenceManager.getInt(getApplicationContext(),"point"));
         }
 
 
@@ -108,6 +122,12 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),DiaryCalendar.class);
+                intent.putExtra("user_id",id);
+                intent.putExtra("user_name",name);
+                intent.putExtra("user_category",category);
+                intent.putExtra("user_age",age);
+                intent.putExtra("user_gender",gender);
+                intent.putExtra("user_point",point);
                 startActivity(intent);
             }
         });
@@ -122,12 +142,13 @@ public class Main extends AppCompatActivity {
                 PreferenceManager.remove(getApplicationContext(), "age");
                 PreferenceManager.remove(getApplicationContext(), "gender");
                 PreferenceManager.remove(getApplicationContext(), "tel");
+                PreferenceManager.remove(getApplicationContext(), "point");
+
                 Intent intent = new Intent(getApplicationContext(), Main.class);
                 startActivity(intent);
                 finish();
             }
         });
-
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
