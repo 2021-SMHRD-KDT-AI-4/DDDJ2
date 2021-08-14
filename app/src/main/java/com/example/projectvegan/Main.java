@@ -26,6 +26,7 @@ public class Main extends AppCompatActivity {
     private ActivityMainBinding binding;
     private int[] imgs = {R.drawable.tree1,R.drawable.tree2,R.drawable.tree3};
 
+    private int point = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class Main extends AppCompatActivity {
         String category = PreferenceManager.getString(getApplicationContext(), "category");
         int age = PreferenceManager.getInt(getApplicationContext(), "age");
         String gender = PreferenceManager.getString(getApplicationContext(), "gender");
-        int point = PreferenceManager.getInt(getApplicationContext(),"point");
+        point = PreferenceManager.getInt(getApplicationContext(),"point");
 
 
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
@@ -85,9 +86,13 @@ public class Main extends AppCompatActivity {
             btn_nav_mypage.setVisibility(View.VISIBLE);
             tv_poing.setVisibility(View.VISIBLE);
             img_tree.setVisibility(View.VISIBLE);
-            tv_nav_login.setText(PreferenceManager.getString(getApplicationContext(), "name"));
-            tv_nav_subtitle.setText(PreferenceManager.getString(getApplicationContext(), "id"));
-            tv_poing.setText("포인트 : "+PreferenceManager.getInt(getApplicationContext(),"point"));
+            tv_nav_login.setText(name);
+            tv_nav_subtitle.setText(id);
+            if(point == -1) {
+                tv_poing.setText("포인트 : " + 0);
+            }else {
+                tv_poing.setText("포인트 : " + point);
+            }
         }
 
 

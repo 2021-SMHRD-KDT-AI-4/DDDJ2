@@ -3,6 +3,6 @@
 3    package="org.opencv" >
 4
 5    <uses-sdk android:minSdkVersion="21" />
-5-->C:\Users\SMHRD\Desktop\DDDJ2\sdk\java\AndroidManifest.xml
+5-->C:\Users\SMHRD\Desktop\Android\DDDJ2\sdk\java\AndroidManifest.xml
 6
 7</manifest>
