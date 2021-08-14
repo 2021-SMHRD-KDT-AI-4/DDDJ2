@@ -54,6 +54,8 @@ public class MyPage extends AppCompatActivity {
     private ImageView edit_info;
     private Button btn_my_calendar;
 
+
+    //영양 정보 초기값
     private float carbohydrate = 0;
     private float protein = 0;
     private float fat = 0;
@@ -108,6 +110,7 @@ public class MyPage extends AppCompatActivity {
 
         edit_info = findViewById(R.id.edit_info);
 
+        // 받아온 값
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         pw = intent.getStringExtra("pw");
@@ -180,6 +183,7 @@ public class MyPage extends AppCompatActivity {
                     startActivityForResult(intent,1000);
                     tv_breakfast.setText("섭취완료");
 
+                    //저장 값
                     breakfast = kcal;
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
@@ -197,6 +201,7 @@ public class MyPage extends AppCompatActivity {
                     startActivityForResult(intent,1000);
                     tv_lunch.setText("섭취완료");
 
+                    //저장 값
                     lunch = kcal;
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
@@ -214,6 +219,7 @@ public class MyPage extends AppCompatActivity {
                     startActivityForResult(intent,1000);
                     tv_dinner.setText("섭취완료");
 
+                    //저장 값
                     dinner = kcal;
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
@@ -227,6 +233,7 @@ public class MyPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDatePicker(getCurrentFocus());
+                // 불러온 값
                 sendRequestSelect();
 
                 pg_kcal.setProgress(progress);
@@ -283,6 +290,7 @@ public class MyPage extends AppCompatActivity {
         tv_my_cal_date.setText(String.format("%d-%d-%d",year,month+1,day));
     }
 
+    // 선택한 날짜 데이터 받아오기
     public void sendRequestSelect(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
@@ -295,6 +303,7 @@ public class MyPage extends AppCompatActivity {
 
                 if(!response.equals("null")){
                     try {
+                        // java에서 넘겨받은 값
                         JSONObject jsonObject = new JSONObject(response);
                         breakfast = Integer.parseInt(jsonObject.getString("breakfast"));
                         lunch = Integer.parseInt(jsonObject.getString("lunch"));
@@ -363,6 +372,7 @@ public class MyPage extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    // 오늘 데이터 넘겨주기
     public void sendRequestUpdate(){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
@@ -409,6 +419,7 @@ public class MyPage extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                //오늘의 데이터
                 params.put("id",id);
                 params.put("date",today);
                 params.put("breakfast",String.valueOf(breakfast));
@@ -430,6 +441,8 @@ public class MyPage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==0 && resultCode == RESULT_OK){
+
+            // 영양소 계산
             carbohydrate += Float.parseFloat(data.getStringExtra("carbohydrate"));
             protein += Float.parseFloat(data.getStringExtra("protein"));
             fat += Float.parseFloat(data.getStringExtra("fat"));

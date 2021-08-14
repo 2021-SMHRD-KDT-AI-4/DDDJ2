@@ -7,29 +7,107 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context=".Challenge">
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/chal_tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="챌린지" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tuesday" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/chal_pager"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.viewpager2.widget.ViewPager2>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_notice"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/notice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/btn_ex"
+                    android:layout_width="match_parent"
+                    android:layout_height="239dp"
+
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="196dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/vegun_drawable_top_size"
+                    android:text="7일 단계별 채식 체험"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/btn_chal"
+                    android:layout_width="match_parent"
+                    android:layout_height="239dp"
+
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="472dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/white"
+                    android:drawableTop="@drawable/challenge_drawable_top_size"
+                    android:text="30일 채식 도전하기"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_ex_ok"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="196dp"
+                android:layout_marginEnd="16dp"
+                android:background="#95AAAAAA"
+                android:gravity="center"
+
+                android:text="진행중"
+                android:textColor="#FFFFFF"
+                android:textSize="48sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_chal_ok"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="472dp"
+                android:layout_marginEnd="16dp"
+                android:background="#86AAAAAA"
+                android:gravity="center"
+
+                android:text="진행중"
+                android:textColor="#FFFFFF"
+                android:textSize="48sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </LinearLayout>
