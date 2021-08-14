@@ -48,20 +48,22 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="132dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/quiz_img_size"
+        android:background="@drawable/quizimg2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_quiz"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="64dp"
-        android:text="문제. 맥주는 비건 음식일까요?"
+        android:layout_marginEnd="24dp"
+        android:text="문제. 채식을 하는 것이 환경에 도움이 될까요?"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

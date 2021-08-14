@@ -30,6 +30,7 @@ import com.example.projectvegan.DTO.SNSDTO;
 import com.example.projectvegan.Main;
 import com.example.projectvegan.PreferenceManager;
 import com.example.projectvegan.Quiz;
+import com.example.projectvegan.R;
 import com.example.projectvegan.Rank;
 import com.example.projectvegan.Recipe;
 import com.example.projectvegan.Scanner;
@@ -43,12 +44,19 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private RequestQueue queue;
     private StringRequest stringRequest;
+
+    private int[] quizs = {R.drawable.quizimg1,R.drawable.quizimg2,R.drawable.quizimg3,R.drawable.quiz_img};
+    private String[] title = {"맥주는 비건 음식일까요","채식을 하는 것이 환경에 도움이 될까요?","소고기 1Kg 생산하는데 배출되는 이산화탄소 양은?",
+                            "한국 오레오는 비건 음식일까요?"};
+
+    Random r = new Random();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +70,14 @@ public class HomeFragment extends Fragment {
         final Button btn_sns = binding.btnSns;
         final TextView tv_main_quiz =  binding.tvMainQuiz;
         final TextView tv_main_recipe = binding.tvMainRecipe;
+        final TextView tv_main_quiz_title = binding.tvMainQuizTitle;
         final ImageView img_main_recipe = binding.imgMainRecipe;
+        final ImageView img_main_quiz = binding.imgMainQuiz;
+
+        int random = r.nextInt(4);
+
+        img_main_quiz.setImageResource(quizs[random]);
+        tv_main_quiz_title.setText(title[random]);
 
         tv_main_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +99,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Quiz.class);
+                intent.putExtra("ranNum",random);
+                startActivity(intent);
+            }
+        });
+
+        img_main_quiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Quiz.class);
+                intent.putExtra("ranNum",random);
                 startActivity(intent);
             }
         });

@@ -18,7 +18,7 @@
             android:id="@+id/btn_yes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="예"
+            android:text="약 25kg"
             android:textColor="#000000"
             android:textSize="24sp" />
 
@@ -26,7 +26,23 @@
             android:id="@+id/btn_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="아니오"
+            android:text="약 27kg"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/btn_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="약 29kg"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/btn_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="약 31kg"
             android:textColor="#000000"
             android:textSize="24sp" />
     </RadioGroup>
@@ -36,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="516dp"
+        android:layout_marginTop="564dp"
         android:text="확인"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,22 +62,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="145dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/quiz_img_size"
+        android:background="@drawable/quizimg3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_quiz"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
         android:layout_marginTop="64dp"
-        android:text="문제. 맥주는 비건 음식일까요?"
+        android:layout_marginEnd="24dp"
+        android:text="문제. 소고기 1Kg 생산하는데 배출되는 이산화탄소 양은? "
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

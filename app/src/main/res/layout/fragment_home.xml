@@ -142,6 +142,10 @@
                         android:layout_marginStart="29dp"
                         android:layout_marginTop="64dp"
                         android:layout_marginEnd="29dp"
+                        android:maxWidth="350dp"
+                        android:maxHeight="206dp"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true"
                         android:src="@drawable/quiz_img"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +153,7 @@
 
                     <TextView
                         android:id="@+id/tv_main_quiz_emt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="29dp"
                         android:layout_marginTop="224dp"
