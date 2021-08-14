@@ -17,14 +17,21 @@
             android:id="@+id/recipe_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="54dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
             android:layout_marginRight="54dp"
             android:gravity="center|left"
             android:hint="음식명"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="88dp"
+            android:background="#000000" />
 
     </LinearLayout>
 
@@ -44,10 +51,21 @@
                 android:orientation="vertical" >
 
                 <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="조리 방법"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/recipe_rc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="24dp"
                     android:hint="레시피"
                     android:textColor="#000000" />
@@ -63,10 +81,29 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="재료"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/recipe_ingredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="24dp"
             android:hint="재료" />
 
