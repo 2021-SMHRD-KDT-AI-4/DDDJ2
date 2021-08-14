@@ -41,6 +41,7 @@ public class EditMyInfo extends AppCompatActivity {
                     edt_edit_name;
     private Spinner edit_cb_level;
 
+    String id,pw,name,tel,category = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,13 @@ public class EditMyInfo extends AppCompatActivity {
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vegetarian.setAdapter(yearAdapter);
 
+        Intent intent = getIntent();
+        id = intent.getStringExtra("user_id");
+        pw =intent.getStringExtra("user_pw");
+        name =intent.getStringExtra("user_name");
+        tel = intent.getStringExtra("user_tel");
+        category = intent.getStringExtra("user_category");
+
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,19 +97,13 @@ public class EditMyInfo extends AppCompatActivity {
                 if(!response.equals("null")){
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        String id = jsonObject.getString("id");
-                        String pw = jsonObject.getString("pw");
-                        String name = jsonObject.getString("name");
-                        String tel = jsonObject.getString("tel");
-                        String category = jsonObject.getString("category");
 
-                        Intent intent = new Intent(getApplicationContext(),Main.class);
-                        intent.putExtra("id",id);
-                        intent.putExtra("pw",pw);
-                        intent.putExtra("name",name);
-                        intent.putExtra("tel",tel);
-                        intent.putExtra("category",category);
-
+                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                        PreferenceManager.setString(getApplicationContext(),"id",jsonObject.getString("user_id"));
+                        PreferenceManager.setString(getApplicationContext(),"pw",jsonObject.getString("user_pw"));
+                        PreferenceManager.setString(getApplicationContext(),"name",jsonObject.getString("user_name"));
+                        PreferenceManager.setString(getApplicationContext(),"tel",jsonObject.getString("user_tel"));
+                        PreferenceManager.setString(getApplicationContext(),"category",jsonObject.getString("user_category"));
                         startActivity(intent);
                         finish();
                     } catch (JSONException e) {
@@ -137,6 +139,7 @@ public class EditMyInfo extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                params.put("id",id);
                 params.put("pw",edt_edit_pw.getText().toString());
                 params.put("name",edt_edit_name.getText().toString());
                 params.put("tel",edt_edit_name.getText().toString());

@@ -62,12 +62,13 @@ public class Main extends AppCompatActivity {
         ImageView img_tree = (ImageView)nav_header_view.findViewById(R.id.img_tree);
 
         String id = PreferenceManager.getString(getApplicationContext(), "id");
+        String pw = PreferenceManager.getString(getApplicationContext(), "pw");
         String name = PreferenceManager.getString(getApplicationContext(), "name");
         String category = PreferenceManager.getString(getApplicationContext(), "category");
         int age = PreferenceManager.getInt(getApplicationContext(), "age");
         String gender = PreferenceManager.getString(getApplicationContext(), "gender");
         point = PreferenceManager.getInt(getApplicationContext(),"point");
-
+        String tel = PreferenceManager.getString(getApplicationContext(),"tel");
 
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);
@@ -101,10 +102,12 @@ public class Main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),DiaryCalendar.class);
                 intent.putExtra("user_id",id);
+                intent.putExtra("user_pw",pw);
                 intent.putExtra("user_name",name);
                 intent.putExtra("user_category",category);
                 intent.putExtra("user_age",age);
                 intent.putExtra("user_gender",gender);
+                intent.putExtra("user_tel",tel);
                 intent.putExtra("user_point",point);
                 startActivity(intent);
             }

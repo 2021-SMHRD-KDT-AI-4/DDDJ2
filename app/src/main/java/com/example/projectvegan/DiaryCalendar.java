@@ -52,12 +52,8 @@ public class DiaryCalendar extends AppCompatActivity {
     private RequestQueue queue;
     private StringRequest stringRequest;
 
-    private String id = "";
-    private String name = "";
-    private String category = "";
-    private int age = 0;
-    private String gender = "";
-    private int point = 0;
+    private String id,pw,name,category,gender,tel = "";
+    private int age,point = 0;
 
 
     @Override
@@ -107,11 +103,13 @@ public class DiaryCalendar extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("user_id");
+        pw = intent.getStringExtra("user_pw");
         name = intent.getStringExtra("user_name");
         category = intent.getStringExtra("user_category");
         age = intent.getIntExtra("user_age",0);
         gender = intent.getStringExtra("user_gender");
         point = intent.getIntExtra("user_point",0);
+        tel = intent.getStringExtra("user_tel");
     }
 
     // 해당 월 일 수 계산
@@ -179,11 +177,13 @@ public class DiaryCalendar extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(),MyPage.class);
                         intent.putExtra("user_id",id);
+                        intent.putExtra("user_pw",pw);
                         intent.putExtra("user_name",name);
                         intent.putExtra("user_category",category);
                         intent.putExtra("user_age",age);
                         intent.putExtra("user_gender",gender);
                         intent.putExtra("user_point",point);
+                        intent.putExtra("user_tel",tel);
 
 //                        intent.putExtra("date",today);
                         startActivity(intent);

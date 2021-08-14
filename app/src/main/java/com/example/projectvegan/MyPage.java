@@ -62,7 +62,7 @@ public class MyPage extends AppCompatActivity {
 
 
     // 회원 정보
-    private String id,name,gender,category = null;
+    private String id,name,gender,category,pw,tel = null;
     int age = 0;
 
     private int breakfast,lunch,dinner = 0;
@@ -111,11 +111,12 @@ public class MyPage extends AppCompatActivity {
         // 받아온 값
         Intent intent = getIntent();
         id = intent.getStringExtra("user_id");
+        pw = intent.getStringExtra("user_pw");
         age = intent.getIntExtra("user_age",0);
         name = intent.getStringExtra("user_name");
         gender = intent.getStringExtra("user_gender");
         category = intent.getStringExtra("user_category");
-
+        tel = intent.getStringExtra("user_tel");
 
         tv_my_level_title.setText(category);
         tv_my_name.setText(name);
@@ -247,6 +248,11 @@ public class MyPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),EditMyInfo.class);
+                intent.putExtra("user_id",id);
+                intent.putExtra("user_pw",pw);
+                intent.putExtra("user_name",name);
+                intent.putExtra("user_tel",tel);
+                intent.putExtra("user_category",category);
                 startActivity(intent);
             }
         });
