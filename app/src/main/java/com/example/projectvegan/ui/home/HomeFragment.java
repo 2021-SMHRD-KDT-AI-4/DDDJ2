@@ -137,13 +137,87 @@ public class HomeFragment extends Fragment {
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendRequest();
+                SNSsendRequest();
             }
         });
         return root;
     }
 
-    public void sendRequest(){
+
+    public void recipeSendRequest(){
+
+        ArrayList<SNSDTO> snsList = new ArrayList<>();
+
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        String url = "http://211.63.240.58:8081/3rd_project/ViewService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+
+                if(!response.equals("null")){
+                    try {
+                        // JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = new JSONArray(response);
+                        for (int i = 0; i< jsonArray.length(); i++) {
+                            int sns_code = jsonArray.getJSONObject(i).getInt("sns_code");
+                            String user_id = jsonArray.getJSONObject(i).getString("user_id");
+                            String sns_title = jsonArray.getJSONObject(i).getString("sns_title");
+                            String sns_content = jsonArray.getJSONObject(i).getString("sns_content");
+                            String sns_img = jsonArray.getJSONObject(i).getString("sns_img");
+                            String user_name = jsonArray.getJSONObject(i).getString("user_name");
+
+                            SNSDTO snsdto = new SNSDTO(sns_code,user_id,sns_title,sns_content, sns_img, user_name);
+                            snsList.add(snsdto);
+                        }
+
+                        Intent intent = new Intent(getContext(),Community.class);
+                        intent.putExtra("snsList", snsList);
+                        startActivity(intent);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "오류!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+
+    public void SNSsendRequest(){
 
         ArrayList<SNSDTO> snsList = new ArrayList<>();
 

@@ -117,7 +117,6 @@ public class CommunityUpdate extends AppCompatActivity {
 
                 bitmap = resize(getApplicationContext(), uri, 250);
 
-
                 resizeImg = BitmapToBase64(bitmap);
                 sendRequest();
             }
