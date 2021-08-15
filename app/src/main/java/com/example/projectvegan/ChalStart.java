@@ -14,9 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class ChalStart extends AppCompatActivity {
     private TextView btn_chal_cancel;
     private Button btn_chal_start;
+
+    Calendar cal = Calendar.getInstance();
+    private String today =cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,7 @@ public class ChalStart extends AppCompatActivity {
         btn_chal_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PreferenceManager.setString(getApplicationContext(), "startChal", today);
                 Intent intent = new Intent();
                 setResult(RESULT_OK,intent);
                 finish();
@@ -52,6 +59,8 @@ public class ChalStart extends AppCompatActivity {
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        PreferenceManager.remove(getApplicationContext(), "startChal");
+
                         Intent intent = new Intent();
                         setResult(RESULT_CANCELED,intent);
                         finish();

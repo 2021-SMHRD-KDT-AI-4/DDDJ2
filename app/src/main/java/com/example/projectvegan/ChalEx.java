@@ -14,9 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class ChalEx extends AppCompatActivity {
     private TextView btn_ex_cancel;
     private Button btn_ex_start;
+
+    Calendar cal = Calendar.getInstance();
+    private String today =cal.get(Calendar.YEAR)+"-"+(cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DATE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +44,11 @@ public class ChalEx extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                PreferenceManager.setString(getApplicationContext(), "startEx", today);
+
                 setResult(RESULT_OK,intent);
                 finish();
+
             }
         });
         btn_ex_cancel.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +60,7 @@ public class ChalEx extends AppCompatActivity {
                 builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        PreferenceManager.remove(getApplicationContext(), "startEx");
                         Intent intent = new Intent();
                         setResult(RESULT_CANCELED,intent);
                         finish();
