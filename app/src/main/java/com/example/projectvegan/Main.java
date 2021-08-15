@@ -45,14 +45,7 @@ public class Main extends AppCompatActivity {
         View nav_header_view = navigationView.getHeaderView(0);
 
 
-        TextView tv_nav_login = (TextView) nav_header_view.findViewById(R.id.tv_nav_login);
-        tv_nav_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
-                startActivity(intent);
-            }
-        });
+
 
         Button btn_nav_logout = (Button)nav_header_view.findViewById(R.id.btn_nav_logout);
         Button btn_nav_mypage = (Button)nav_header_view.findViewById(R.id.btn_nav_mypage);
@@ -70,7 +63,16 @@ public class Main extends AppCompatActivity {
         String tel = PreferenceManager.getString(getApplicationContext(),"tel");
         int point =PreferenceManager.getInt(getApplicationContext(),"point");
 
-
+        TextView tv_nav_login = (TextView) nav_header_view.findViewById(R.id.tv_nav_login);
+        if(id.equals("데이터가 없습니다.")) {
+            tv_nav_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+                }
+            });
+        }
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);
             btn_nav_mypage.setVisibility(View.INVISIBLE);
