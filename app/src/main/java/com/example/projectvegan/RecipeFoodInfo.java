@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.projectvegan.DTO.SNSDTO;
+
+import java.util.ArrayList;
+
 public class RecipeFoodInfo extends AppCompatActivity {
     private TextView recipe_title,recipe_rc,recipe_ingredient;
 
@@ -26,9 +30,10 @@ public class RecipeFoodInfo extends AppCompatActivity {
         recipe_ingredient = findViewById(R.id.recipe_ingredient);
 
         Intent intent = getIntent();
-        recipe_title.setText(intent.getStringExtra("title"));
-        recipe_rc.setText(intent.getStringExtra("recipe"));
-        recipe_ingredient.setText(intent.getStringExtra("ingredient"));
+
+        recipe_title.setText(intent.getStringExtra("rName"));
+        recipe_rc.setText(intent.getStringExtra("rCon"));
+        recipe_ingredient.setText(intent.getStringExtra("rIn"));
 
     }
 
