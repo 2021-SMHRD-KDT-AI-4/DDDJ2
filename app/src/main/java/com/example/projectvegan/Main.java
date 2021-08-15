@@ -27,7 +27,6 @@ public class Main extends AppCompatActivity {
     private ActivityMainBinding binding;
     private int[] imgs = {R.drawable.tree1,R.drawable.tree2,R.drawable.tree3};
 
-    private int point = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +67,9 @@ public class Main extends AppCompatActivity {
         String category = PreferenceManager.getString(getApplicationContext(), "category");
         int age = PreferenceManager.getInt(getApplicationContext(), "age");
         String gender = PreferenceManager.getString(getApplicationContext(), "gender");
-        point = PreferenceManager.getInt(getApplicationContext(),"point");
         String tel = PreferenceManager.getString(getApplicationContext(),"tel");
+        int point =PreferenceManager.getInt(getApplicationContext(),"point");
 
-        if(point == -1) {
-            PreferenceManager.setInt(getApplicationContext(),"point",0);
-            point = PreferenceManager.getInt(getApplicationContext(),"point");
-
-        }
 
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);

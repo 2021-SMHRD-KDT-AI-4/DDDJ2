@@ -93,8 +93,7 @@ public class HomeFragment extends Fragment {
         tv_main_recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Recipe.class);
-                startActivity(intent);
+                recipeSendRequest();
             }
         });
 
