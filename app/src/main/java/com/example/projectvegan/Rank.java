@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,7 +16,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rank extends AppCompatActivity {
     private RecyclerView rank_list;
@@ -26,6 +45,12 @@ public class Rank extends AppCompatActivity {
 
     private ArrayList<RankItem> ranklist = new ArrayList<RankItem>();
 
+
+    private ArrayList<RankItem> rankList = null;
+
+    ArrayList<String> name;
+    ArrayList<Integer> point;
+    int num = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +76,33 @@ public class Rank extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 */
 
+
         Intent intent = getIntent();
-        ranklist = (ArrayList<RankItem>) intent.getSerializableExtra("rankList");
 
-        rank1_name.setText(ranklist.get(0).getName());
-        rank2_name.setText(ranklist.get(1).getName());
-        rank3_name.setText(ranklist.get(2).getName());
+        name = new ArrayList<String>();
+        point = new ArrayList<Integer>();
 
-        rank1_point.setText(ranklist.get(0).getPoint());
-        rank2_point.setText(ranklist.get(1).getPoint());
-        rank3_point.setText(ranklist.get(2).getPoint());
+
+
+        while (true) {
+            name.add(intent.getStringExtra("rankName" + num));
+            point.add(intent.getIntExtra("rankPoint" + num, 0));
+            num++;
+            if(intent.getStringExtra("rankName" + num)==null){
+                break;
+            }
+        }
+
+//        ranklist = (ArrayList<RankItem>) intent.getStringExtra("rankList");
+
+
+        rank1_name.setText(name.get(0));
+        rank2_name.setText(name.get(1));
+        rank3_name.setText(name.get(2));
+
+        rank1_point.setText(point.get(0)+"");
+        rank2_point.setText(point.get(1)+"");
+        rank3_point.setText(point.get(2)+"");
 
         rank_list = findViewById(R.id.rank_list);
 
@@ -81,19 +123,19 @@ public class Rank extends AppCompatActivity {
 
 
 
-        settingList(ranklist);
+        settingList();
 
         rankArrayList.addAll(rankFilteredList);
     }
 
 
-    private void settingList( ArrayList<RankItem> ranklist){
+    private void settingList(){
 
-        for (int i = 3; i < ranklist.size(); i++) {
-            rankArrayList.add(new RankItem(i, ranklist.get(i).getName(), ranklist.get(i).getPoint()));
+        for (int i = 3; i < name.size(); i++) {
+            rankArrayList.add(new RankItem(i, name.get(i), point.get(i)));
         }
 
-//        rankArrayList.add(new RankItem("1","집","돈가스"));
+//        rankArrayList.add(new RankItem("1","집",10));
 //        rankArrayList.add(new RankItem("2","가고","먹고"));
 //        rankArrayList.add(new RankItem("3","싶다","싶다"));
 
@@ -116,6 +158,8 @@ public class Rank extends AppCompatActivity {
             outRect.top = divHeight;
         }
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

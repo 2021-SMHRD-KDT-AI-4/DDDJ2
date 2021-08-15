@@ -31,9 +31,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(RankAdapter.ViewHolder holder, final int position) {
 
-        holder.rankNum.setText(rankItemArrayList.get(position).getNum());
+        holder.rankNum.setText(rankItemArrayList.get(position).getNum()+"");
         holder.rankNick.setText(rankItemArrayList.get(position).getName());
-        holder.rankPoint.setText(rankItemArrayList.get(position).getPoint());
+        holder.rankPoint.setText(rankItemArrayList.get(position).getPoint()+"");
     }
 
     @Override

@@ -25,9 +25,7 @@ public class Recipe extends AppCompatActivity {
     RecipeAdapter recipeAdapter;
     LinearLayoutManager linearLayoutManager;
 
-    Intent intent = getIntent();
-    ArrayList<RecipeItem> recipeList = (ArrayList<RecipeItem>) intent.getSerializableExtra("recipeList");
-
+    ArrayList<String> recipeList = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +35,10 @@ public class Recipe extends AppCompatActivity {
         actionBar.setTitle("레시피");
 
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+        recipeList = (ArrayList<String>) intent.getSerializableExtra("recipeList");
+
         edt_rc_search_item = findViewById(R.id.edt_rc_search_item);
         tv_rc_search_btn = findViewById(R.id.tv_rc_search_btn);
         rv_rc_search_item = findViewById(R.id.rv_rc_search_item);
@@ -90,9 +92,10 @@ public class Recipe extends AppCompatActivity {
         for (int i = 0; i < recipeList.size(); i++) {
             recipeFoodItemArrayList.add(
                     new RecipeItem(
-                            recipeList.get(i).getRecipeFoodName(),
+                            recipeList.get(i)
+                            /*recipeList.get(i).getRecipeFoodName(),
                             recipeList.get(i).getRecipeFoodRc(),
-                            recipeList.get(i).getRecipeFoodIngredient()
+                            recipeList.get(i).getRecipeFoodIngredient()*/
             ));
         }
 //        recipeFoodItemArrayList.add(new RecipeItem("피자","맛있다","치즈"));

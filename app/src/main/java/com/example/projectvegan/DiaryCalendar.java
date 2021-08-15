@@ -101,15 +101,6 @@ public class DiaryCalendar extends AppCompatActivity {
         gridAdapter = new GridAdapter(getApplicationContext(),day_list);
         gv_calendar.setAdapter(gridAdapter);
 
-        Intent intent = getIntent();
-        id = intent.getStringExtra("user_id");
-        pw = intent.getStringExtra("user_pw");
-        name = intent.getStringExtra("user_name");
-        category = intent.getStringExtra("user_category");
-        age = intent.getIntExtra("user_age",0);
-        gender = intent.getStringExtra("user_gender");
-        point = intent.getIntExtra("user_point",0);
-        tel = intent.getStringExtra("user_tel");
     }
 
     // 해당 월 일 수 계산
@@ -176,16 +167,6 @@ public class DiaryCalendar extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(),MyPage.class);
-                        intent.putExtra("user_id",id);
-                        intent.putExtra("user_pw",pw);
-                        intent.putExtra("user_name",name);
-                        intent.putExtra("user_category",category);
-                        intent.putExtra("user_age",age);
-                        intent.putExtra("user_gender",gender);
-                        intent.putExtra("user_point",point);
-                        intent.putExtra("user_tel",tel);
-
-//                        intent.putExtra("date",today);
                         startActivity(intent);
                     }
                 });
@@ -198,69 +179,6 @@ public class DiaryCalendar extends AppCompatActivity {
         TextView tvItemGridView;
     }
 
-    /*public void sendRequest(){
-        // Voolley Lib 새료운 요청객체 생성
-        queue = Volley.newRequestQueue(this);
-        String url = "http://211.63.240.58:8081/3rd_project/Diary";
-        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            // 응답데이터를 받아오는 곳
-            @Override
-            public void onResponse(String response) {
-                Log.v("resultValue",response);
-
-                if(!response.equals("null")){
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        PreferenceManager.setString(getApplicationContext(), "id", jsonObject.getString("user_id"));
-                        PreferenceManager.setString(getApplicationContext(), "pw", jsonObject.getString("user_pw"));
-                        PreferenceManager.setString(getApplicationContext(), "name", jsonObject.getString("user_name"));
-                        PreferenceManager.setString(getApplicationContext(), "category", jsonObject.getString("user_category"));
-                        PreferenceManager.setInt(getApplicationContext(), "age", jsonObject.getInt("user_age"));
-                        PreferenceManager.setString(getApplicationContext(), "gender", jsonObject.getString("user_gender"));
-                        PreferenceManager.setString(getApplicationContext(), "tel", jsonObject.getString("user_tel"));
-                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
-
-
-                        startActivity(intent);
-                        finish();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    Toast.makeText(getApplicationContext(),"로그인 실패..",Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            // 서버와의 연동 에러시 출력
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        }){
-            @Override //response를 UTF8로 변경해주는 소스코드
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                try {
-                    String utf8String = new String(response.data, "UTF-8");
-                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
-                } catch (UnsupportedEncodingException e) {
-                    // log error
-                    return Response.error(new ParseError(e));
-                } catch (Exception e) {
-                    // log error
-                    return Response.error(new ParseError(e));
-                }
-            }
-
-            // 보낼 데이터를 저장하는 곳
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

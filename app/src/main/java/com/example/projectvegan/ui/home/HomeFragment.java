@@ -52,14 +52,13 @@ public class HomeFragment extends Fragment {
 
 
     private RecipeItem recipeItem = null;
-    private ArrayList<RecipeItem> recipeFoodItemArrayList;
     private FragmentHomeBinding binding;
     private RequestQueue queue;
     private StringRequest stringRequest;
 
     private ArrayList<RankItem> rankList;
     private ArrayList<SNSDTO> snsList;
-    private ArrayList<RecipeItem> recipeList;
+    private ArrayList<String> recipeList = null;
 
     private int[] quizs = {R.drawable.quizimg1,R.drawable.quizimg2,R.drawable.quizimg3,R.drawable.quiz_img};
     private String[] title = {"맥주는 비건 음식일까요","채식을 하는 것이 환경에 도움이 될까요?","소고기 1Kg 생산하는데 배출되는 이산화탄소 양은?",
@@ -168,17 +167,16 @@ public class HomeFragment extends Fragment {
                         // JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = new JSONArray(response);
 
+                        Intent intent = new Intent(getContext(),Rank.class);
+
                         for (int i = 0; i< jsonArray.length(); i++) {
-                            String user_id = jsonArray.getJSONObject(i).getString("user_id");
                             String user_name = jsonArray.getJSONObject(i).getString("user_name");
                             int user_point = jsonArray.getJSONObject(i).getInt("user_point");
 
-                            RankItem rankItem = new RankItem(user_id,user_name,user_point);
-                            rankList.add(rankItem);
+                            intent.putExtra("rankName"+i, user_name);
+                            intent.putExtra("rankPoint"+i, user_point);
                         }
 
-                        Intent intent = new Intent(getContext(),Rank.class);
-                        intent.putExtra("rankList", rankList);
                         startActivity(intent);
 
                     } catch (JSONException e) {
@@ -231,20 +229,18 @@ public class HomeFragment extends Fragment {
             // 응답데이터를 받아오는 곳
             @Override
             public void onResponse(String response) {
-                Log.v("resultValue",response);
 
                 if(!response.equals("null")){
                     try {
-                        // JSONObject jsonObject = new JSONObject(response);
+                        recipeList = new ArrayList<String>();
                         JSONArray jsonArray = new JSONArray(response);
-                        for (int i = 0; i< jsonArray.length(); i++) {
-                            String recipe_title = jsonArray.getJSONObject(i).getString("recipe_title");
-                            String recipe_content = jsonArray.getJSONObject(i).getString("recipe_content");
-                            String recipe_ingredient = jsonArray.getJSONObject(i).getString("recipe_ingredient");
-
-                            recipeItem = new RecipeItem(recipe_title,recipe_content,recipe_ingredient);
-                            recipeList.add(recipeItem);
+                        if (jsonArray != null) {
+                            int len = jsonArray.length();
+                            for (int i=0;i<len;i++){
+                                recipeList.add(jsonArray.get(i).toString());
+                            }
                         }
+                        Log.v("resultValue", String.valueOf(recipeList.get(100)));
 
                         Intent intent = new Intent(getContext(),Recipe.class);
                         intent.putExtra("recipeList", recipeList);

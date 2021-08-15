@@ -7,7 +7,11 @@ public class RecipeItem implements Serializable {
     String recipeFoodRc;
     String recipeFoodIngredient;
 
-    public RecipeItem(String recipeFoodName,String recipeFoodRc,String recipeFoodIngredient)
+    public RecipeItem(String recipeFoodName) {
+        this.recipeFoodName = recipeFoodName;
+    }
+
+    public RecipeItem(String recipeFoodName, String recipeFoodRc, String recipeFoodIngredient)
     {
         this.recipeFoodName = recipeFoodName;
         this.recipeFoodRc = recipeFoodRc;

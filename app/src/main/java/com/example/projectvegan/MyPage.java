@@ -109,14 +109,22 @@ public class MyPage extends AppCompatActivity {
         edit_info = findViewById(R.id.edit_info);
 
         // 받아온 값
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         id = intent.getStringExtra("user_id");
         pw = intent.getStringExtra("user_pw");
         age = intent.getIntExtra("user_age",0);
         name = intent.getStringExtra("user_name");
         gender = intent.getStringExtra("user_gender");
         category = intent.getStringExtra("user_category");
-        tel = intent.getStringExtra("user_tel");
+        tel = intent.getStringExtra("user_tel");*/
+
+        id = PreferenceManager.getString(getApplicationContext(),"id");
+        pw = PreferenceManager.getString(getApplicationContext(),"pw");
+        age = PreferenceManager.getInt(getApplicationContext(),"age");
+        name = PreferenceManager.getString(getApplicationContext(),"name");
+        gender = PreferenceManager.getString(getApplicationContext(),"gender");
+        category = PreferenceManager.getString(getApplicationContext(),"category");
+        tel = PreferenceManager.getString(getApplicationContext(),"tel");
 
         tv_my_level_title.setText(category);
         tv_my_name.setText(name);
@@ -319,7 +327,6 @@ public class MyPage extends AppCompatActivity {
                         kcal = Integer.parseInt(jsonObject.getString("kcal"));
 
                         Intent intent = new Intent(getApplicationContext(),MyPage.class);
-
                         intent.putExtra("breakfast",breakfast);
                         intent.putExtra("lunch",lunch);
                         intent.putExtra("dinner",dinner);
@@ -329,7 +336,6 @@ public class MyPage extends AppCompatActivity {
                         intent.putExtra("natrum",natrum);
                         intent.putExtra("sugar",sugar);
                         intent.putExtra("kcal",kcal);
-
                         startActivity(intent);
                         finish();
                     } catch (JSONException e) {

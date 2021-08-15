@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.projectvegan.databinding.ActivityRankBinding;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -70,6 +71,12 @@ public class Main extends AppCompatActivity {
         point = PreferenceManager.getInt(getApplicationContext(),"point");
         String tel = PreferenceManager.getString(getApplicationContext(),"tel");
 
+        if(point == -1) {
+            PreferenceManager.setInt(getApplicationContext(),"point",0);
+            point = PreferenceManager.getInt(getApplicationContext(),"point");
+
+        }
+
         if(id.equals(PreferenceManager.DEFAULT_STRING)){
             btn_nav_logout.setVisibility(View.INVISIBLE);
             btn_nav_mypage.setVisibility(View.INVISIBLE);
@@ -89,11 +96,7 @@ public class Main extends AppCompatActivity {
             img_tree.setVisibility(View.VISIBLE);
             tv_nav_login.setText(name);
             tv_nav_subtitle.setText(id);
-            if(point == -1) {
-                tv_poing.setText("포인트 : " + 0);
-            }else {
-                tv_poing.setText("포인트 : " + point);
-            }
+            tv_poing.setText("포인트 : " + point);
         }
 
 
