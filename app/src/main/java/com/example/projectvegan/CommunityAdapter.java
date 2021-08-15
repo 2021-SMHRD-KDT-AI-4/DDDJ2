@@ -41,12 +41,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public void onBindViewHolder(CommunityAdapter.ViewHolder holder, final int position) {
 
-        Bitmap myBitmap = StringToBitmap(communityItemArrayList.get(position).getSns_img());
 
         holder.userName.setText(communityItemArrayList.get(position).getUser_name());
         holder.userEmail.setText(communityItemArrayList.get(position).getUser_id());
         holder.comTitle.setText(communityItemArrayList.get(position).getSns_title());
-        holder.comImg.setImageBitmap(myBitmap);
+        // holder.comImg.setImageBitmap(myBitmap);
         holder.userText.setText(communityItemArrayList.get(position).getSns_content());
     }
 

@@ -42,6 +42,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +57,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private RequestQueue queue;
     private StringRequest stringRequest;
+
+    private SNSDTO snsdto;
 
     private ArrayList<RankItem> rankList;
     private ArrayList<SNSDTO> snsList;
@@ -214,6 +218,7 @@ public class HomeFragment extends Fragment {
                 return params;
             }
         };
+
         queue.add(stringRequest);
     }
 
@@ -300,20 +305,22 @@ public class HomeFragment extends Fragment {
                 if(!response.equals("null")){
                     try {
                         // JSONObject jsonObject = new JSONObject(response);
+                        snsList = new ArrayList<SNSDTO>();
                         JSONArray jsonArray = new JSONArray(response);
 
-                        for (int i = 0; i< jsonArray.length(); i++) {
-                            int sns_code = jsonArray.getJSONObject(i).getInt("sns_code");
-                            String user_id = jsonArray.getJSONObject(i).getString("user_id");
-                            String sns_title = jsonArray.getJSONObject(i).getString("sns_title");
-                            String sns_content = jsonArray.getJSONObject(i).getString("sns_content");
-                            String sns_img = jsonArray.getJSONObject(i).getString("sns_img");
-                            String user_name = jsonArray.getJSONObject(i).getString("user_name");
+                        if (jsonArray != null) {
+                            int len = jsonArray.length();
+                            for (int i=0;i<len;i++){
+                                String user_id = jsonArray.getJSONObject(i).getString("user_id");
+                                String sns_title = jsonArray.getJSONObject(i).getString("sns_title");
+                                String sns_content = jsonArray.getJSONObject(i).getString("sns_content");
+                                BufferedInputStream sns_img = (BufferedInputStream) jsonArray.getJSONObject(i).get("sns_img_buffer");
+                                String user_name = jsonArray.getJSONObject(i).getString("user_name");
 
-                            SNSDTO snsdto = new SNSDTO(sns_code,user_id,sns_title,sns_content, sns_img, user_name);
-                            snsList.add(snsdto);
+                                snsdto = new SNSDTO(user_id,sns_title,sns_content, sns_img, user_name);
+                                snsList.add(snsdto);
+                            }
                         }
-
                         Intent intent = new Intent(getContext(),Community.class);
                         intent.putExtra("snsList", snsList);
                         startActivity(intent);
@@ -350,7 +357,6 @@ public class HomeFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
                 return params;
             }
         };
