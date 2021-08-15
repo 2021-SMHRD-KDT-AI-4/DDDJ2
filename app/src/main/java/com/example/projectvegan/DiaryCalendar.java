@@ -78,6 +78,8 @@ public class DiaryCalendar extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        id = PreferenceManager.getString(getApplicationContext(),"id");
+
         day_list = new ArrayList<>();
         day_list.add("일");
         day_list.add("월");
@@ -166,8 +168,7 @@ public class DiaryCalendar extends AppCompatActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
-                        startActivity(intent);
+                        sendRequestUpdate(sToday);
                     }
                 });
             }
@@ -178,7 +179,76 @@ public class DiaryCalendar extends AppCompatActivity {
     private class ViewHolder {
         TextView tvItemGridView;
     }
+    // 오늘 데이터 넘겨주기
+    public void sendRequestUpdate(String sToday){
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(this);
+        String url = "http://211.63.240.58:8081/3rd_project/MyService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
 
+                if(!response.equals("null")){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                        if(jsonObject.getString("total_calory").equals("0")) {
+                            startActivity(intent);
+                        }else {
+                            float carbohydrate = Float.parseFloat(jsonObject.getString("nut_carbohydrate"));
+                            float protein = Float.parseFloat(jsonObject.getString("nut_protein"));
+                            float fat = Float.parseFloat(jsonObject.getString("nut_fat"));
+                            float natrum = Float.parseFloat(jsonObject.getString("nut_natrum"));
+                            float sugar = Float.parseFloat(jsonObject.getString("nut_sugar"));
+                            float kcal = Integer.parseInt(jsonObject.getString("food_kcal"));
+                            startActivity(intent);
+                        }
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"등록 실패",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                //오늘의 데이터
+                params.put("user_id",id);
+                params.put("today_date",sToday);
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
