@@ -44,13 +44,6 @@ public class SearchItem extends AppCompatActivity {
     FoodAdapter foodAdapter;
     LinearLayoutManager linearLayoutManager;
 
-    private float carbohydrate = 0;
-    private float protein = 0;
-    private float fat = 0;
-    private float natrum = 0;
-    private float sugar = 0;
-    private int kcal = 0;
-
     private RequestQueue queue;
     private StringRequest stringRequest;
 

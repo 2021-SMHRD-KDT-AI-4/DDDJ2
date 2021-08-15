@@ -76,14 +76,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             foodName = itemView.findViewById(R.id.foodName);
             foodCom = itemView.findViewById(R.id.foodCom);
             foodKcal = itemView.findViewById(R.id.foodKcal);
-
-
-
 /*
             if (foodCheck.isChecked()) {
                 String name = foodName.getText().toString();
                 sendRequest(name);
             }*/
+
+
 
             itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -112,13 +111,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     // Log.v("resultValue", jsonObject.getString("isCheck"));
-                    float carbohydrate = Float.parseFloat(jsonObject.getString("nut_carbohydrate"));
-                    float protein = Float.parseFloat(jsonObject.getString("nut_protein"));
-                    float fat = Float.parseFloat(jsonObject.getString("nut_fat"));
-                    float natrum = Float.parseFloat(jsonObject.getString("nut_natrum"));
-                    float sugar = Float.parseFloat(jsonObject.getString("nut_sugar"));
-                    int kcal = jsonObject.getInt("food_calory");
-                    String food = jsonObject.getString("food_name");
+                    float carbohydrate = Float.parseFloat(jsonObject.getString("total_carbohydrate"));
+                    float protein = Float.parseFloat(jsonObject.getString("total_protein"));
+                    float fat = Float.parseFloat(jsonObject.getString("total_fat"));
+                    float natrum = Float.parseFloat(jsonObject.getString("total_natrum"));
+                    float sugar = Float.parseFloat(jsonObject.getString("total_sugar"));
+                    int kcal = jsonObject.getInt("total_calory");
 
                     Intent intent = new Intent(activity,MyPage.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     // Intent intent = new Intent(context, RecipeFoodInfo.class);
@@ -128,9 +126,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                     intent.putExtra("natrum", natrum);
                     intent.putExtra("sugar", sugar);
                     intent.putExtra("kcal", kcal);
-                    intent.putExtra("food",food);
 
                     activity.startActivity(intent);
+                    activity.finish();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -162,7 +160,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                String todayDate = PreferenceManager.getString(activity.getApplicationContext(), "date");
+
+                params.put("user_id", PreferenceManager.getString(activity.getApplicationContext(), "id"));
                 params.put("food_name",name);
+                params.put("today_date", todayDate);
+                params.put("time", PreferenceManager.getString(activity.getApplicationContext(), "time"));
                 return params;
             }
         };

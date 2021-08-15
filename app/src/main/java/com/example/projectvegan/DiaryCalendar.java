@@ -160,15 +160,18 @@ public class DiaryCalendar extends AppCompatActivity {
             //해당 날짜 텍스트 컬러,배경 변경
             mCal = Calendar.getInstance();
             //오늘 day 가져옴
-            Integer today = mCal.get(Calendar.DAY_OF_MONTH);
+            int today = mCal.get(Calendar.DAY_OF_MONTH);
+            int month = mCal.get(Calendar.MONTH)+1;
+            int year = mCal.get(Calendar.YEAR);
             String sToday = String.valueOf(today);
+            String todayDB = year+"년"+month+"월"+today+"일";
             if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
                 holder.tvItemGridView.setTextColor(Color.BLACK);
                 convertView.setBackgroundColor(Color.rgb(159,229,84));
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendRequestUpdate(sToday);
+                        sendRequestUpdate(todayDB);
                     }
                 });
             }
@@ -180,7 +183,7 @@ public class DiaryCalendar extends AppCompatActivity {
         TextView tvItemGridView;
     }
     // 오늘 데이터 넘겨주기
-    public void sendRequestUpdate(String sToday){
+    public void sendRequestUpdate(String d){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
         String url = "http://211.63.240.58:8081/3rd_project/MyService";
@@ -198,13 +201,24 @@ public class DiaryCalendar extends AppCompatActivity {
                         if(jsonObject.getString("total_calory").equals("0")) {
                             startActivity(intent);
                         }else {
-                            float carbohydrate = Float.parseFloat(jsonObject.getString("nut_carbohydrate"));
-                            float protein = Float.parseFloat(jsonObject.getString("nut_protein"));
-                            float fat = Float.parseFloat(jsonObject.getString("nut_fat"));
-                            float natrum = Float.parseFloat(jsonObject.getString("nut_natrum"));
-                            float sugar = Float.parseFloat(jsonObject.getString("nut_sugar"));
-                            float kcal = Integer.parseInt(jsonObject.getString("food_kcal"));
+                            float carbohydrate = Float.parseFloat(jsonObject.getString("total_carbohydrate"));
+                            float protein = Float.parseFloat(jsonObject.getString("total_protein"));
+                            float fat = Float.parseFloat(jsonObject.getString("total_fat"));
+                            float natrum = Float.parseFloat(jsonObject.getString("total_natrum"));
+                            float sugar = Float.parseFloat(jsonObject.getString("total_sugar"));
+                            int kcal = Integer.parseInt(jsonObject.getString("food_calory"));
+
+                            PreferenceManager.setString(getApplicationContext(), "date", d);
+
+                            intent.putExtra("carbohydrate", carbohydrate);
+                            intent.putExtra("protein", protein);
+                            intent.putExtra("fat", fat);
+                            intent.putExtra("natrum", natrum);
+                            intent.putExtra("sugar", sugar);
+                            intent.putExtra("calory", kcal);
+
                             startActivity(intent);
+                            finish();
                         }
                         finish();
                     } catch (JSONException e) {
@@ -242,7 +256,7 @@ public class DiaryCalendar extends AppCompatActivity {
 
                 //오늘의 데이터
                 params.put("user_id",id);
-                params.put("today_date",sToday);
+                params.put("today_date",d);
 
                 return params;
             }
