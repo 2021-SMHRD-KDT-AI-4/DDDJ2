@@ -202,10 +202,7 @@ public class MyPage extends AppCompatActivity {
 //                    natrum += (int)intent.getDoubleExtra("natrum",0);
 //                    sugar += (int)intent.getDoubleExtra("sugar",0);
 //                    kcal += (int)intent.getIntExtra("kcal",0);
-                    progress += kcal;
 
-                    pg_kcal.setProgress(progress);
-                    tv_my_kcal.setText(progress+"");
                 }
             }
         });
@@ -225,9 +222,7 @@ public class MyPage extends AppCompatActivity {
 //                    natrum += Float.parseFloat(intent.getStringExtra("natrum"));
 //                    sugar += Float.parseFloat(intent.getStringExtra("sugar"));
 //                    kcal += intent.getIntExtra("kcal",0);
-                    progress += kcal;
-                    pg_kcal.setProgress(progress);
-                    tv_my_kcal.setText(progress+"");
+
                 }
             }
         });
@@ -247,9 +242,7 @@ public class MyPage extends AppCompatActivity {
 //                    natrum += intent.getDoubleExtra("natrum",0);
 //                    sugar += intent.getDoubleExtra("sugar",0);
 //                    kcal += intent.getIntExtra("kcal",0);
-                    progress += kcal;
-                    pg_kcal.setProgress(progress);
-                    tv_my_kcal.setText(progress+"");
+
                 }
             }
         });
@@ -282,7 +275,8 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
-
+        pg_kcal.setProgress(kcal);
+        tv_my_kcal.setText(progress+"");
         //영양소 막대차트
         BarChart barChart = findViewById(R.id.bar_chart);
         ArrayList<BarEntry> nutrient = new ArrayList<>();
