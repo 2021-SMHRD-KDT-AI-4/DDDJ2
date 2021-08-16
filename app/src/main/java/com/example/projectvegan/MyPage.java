@@ -253,7 +253,7 @@ public class MyPage extends AppCompatActivity {
             public void onClick(View v) {
                 showDatePicker(getCurrentFocus());
                 // 불러온 값
-                // sendRequestSelect();
+
             }
         });
 
@@ -311,6 +311,8 @@ public class MyPage extends AppCompatActivity {
 
     public void processDatePickerResult(int year, int month, int day){
         tv_my_cal_date.setText(String.format("%d-%d-%d",year,month+1,day));
+        String date = tv_my_cal_date.getText().toString();
+        sendRequestSelect(date);
     }
     // 가공식품 데이터
     public void itemSendRequest(String time){
@@ -384,7 +386,7 @@ public class MyPage extends AppCompatActivity {
     }
 
     // 선택한 날짜 데이터 받아오기
-    public void sendRequestSelect(){
+    public void sendRequestSelect(String date){
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(this);
         String url = "http://211.63.240.58:8081/3rd_project/MyService";
@@ -398,12 +400,12 @@ public class MyPage extends AppCompatActivity {
                     try {
                         // java에서 넘겨받은 값
                         JSONObject jsonObject = new JSONObject(response);
-                        carbohydrate = jsonObject.getInt("carbohydrate");
-                        protein = jsonObject.getInt("protein");
-                        fat = jsonObject.getInt("fat");
-                        natrum = jsonObject.getInt("natrum");
-                        sugar = jsonObject.getInt("sugar");
-                        kcal = Integer.parseInt(jsonObject.getString("kcal"));
+                        carbohydrate = jsonObject.getInt("total_carbohydrate");
+                        protein = jsonObject.getInt("total_protein");
+                        fat = jsonObject.getInt("total_fat");
+                        natrum = jsonObject.getInt("total_natrum");
+                        sugar = jsonObject.getInt("total_sugar");
+                        kcal = Integer.parseInt(jsonObject.getString("total_calory"));
 
                         Intent intent = new Intent(getApplicationContext(),MyPage.class);
                         intent.putExtra("carbohydrate",carbohydrate);
@@ -448,7 +450,7 @@ public class MyPage extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("user_id",id);
-                params.put("pick_date",tv_my_cal_date.getText().toString());
+                params.put("pick_date",date);
 
                 return params;
             }

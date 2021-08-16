@@ -199,6 +199,7 @@ public class DiaryCalendar extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
 
                         Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                        Log.d("kcal",jsonObject.getString("total_calory"));
                         if(jsonObject.getString("total_calory").equals("0")) {
                             startActivity(intent);
                         }else {
@@ -207,7 +208,7 @@ public class DiaryCalendar extends AppCompatActivity {
                             float fat = Float.parseFloat(jsonObject.getString("total_fat"));
                             float natrum = Float.parseFloat(jsonObject.getString("total_natrum"));
                             float sugar = Float.parseFloat(jsonObject.getString("total_sugar"));
-                            int kcal = Integer.parseInt(jsonObject.getString("food_calory"));
+                            int kcal = Integer.parseInt(jsonObject.getString("total_calory"));
 
 
 
