@@ -140,6 +140,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         btn_rank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
