@@ -171,6 +171,7 @@ public class DiaryCalendar extends AppCompatActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        PreferenceManager.setString(getApplicationContext(), "date", todayDB);
                         sendRequestUpdate(todayDB);
                     }
                 });
@@ -208,7 +209,7 @@ public class DiaryCalendar extends AppCompatActivity {
                             float sugar = Float.parseFloat(jsonObject.getString("total_sugar"));
                             int kcal = Integer.parseInt(jsonObject.getString("food_calory"));
 
-                            PreferenceManager.setString(getApplicationContext(), "date", d);
+
 
                             intent.putExtra("carbohydrate", carbohydrate);
                             intent.putExtra("protein", protein);
