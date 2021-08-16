@@ -204,8 +204,6 @@ public class MyPage extends AppCompatActivity {
 //                    kcal += (int)intent.getIntExtra("kcal",0);
                     progress += kcal;
 
-                    //저장 값
-
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
                 }
@@ -227,13 +225,9 @@ public class MyPage extends AppCompatActivity {
 //                    natrum += Float.parseFloat(intent.getStringExtra("natrum"));
 //                    sugar += Float.parseFloat(intent.getStringExtra("sugar"));
 //                    kcal += intent.getIntExtra("kcal",0);
-
                     progress += kcal;
-                    //저장 값
-
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
-
                 }
             }
         });
@@ -254,8 +248,6 @@ public class MyPage extends AppCompatActivity {
 //                    sugar += intent.getDoubleExtra("sugar",0);
 //                    kcal += intent.getIntExtra("kcal",0);
                     progress += kcal;
-                    //저장 값
-
                     pg_kcal.setProgress(progress);
                     tv_my_kcal.setText(progress+"");
                 }
@@ -269,10 +261,6 @@ public class MyPage extends AppCompatActivity {
                 showDatePicker(getCurrentFocus());
                 // 불러온 값
                 // sendRequestSelect();
-
-                pg_kcal.setProgress(progress);
-                tv_my_kcal.setText(progress+"");
-
             }
         });
 
@@ -293,7 +281,8 @@ public class MyPage extends AppCompatActivity {
                 finish();
             }
         });
-        
+
+
         //영양소 막대차트
         BarChart barChart = findViewById(R.id.bar_chart);
         ArrayList<BarEntry> nutrient = new ArrayList<>();
@@ -359,9 +348,9 @@ public class MyPage extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(),SearchItem.class);
                         intent.putExtra("searchItem", foodItemList);
-
-                        startActivity(intent);
                         finish();
+                        startActivity(intent);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

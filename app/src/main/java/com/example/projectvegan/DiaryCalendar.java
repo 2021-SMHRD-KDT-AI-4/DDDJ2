@@ -215,7 +215,7 @@ public class DiaryCalendar extends AppCompatActivity {
                             intent.putExtra("fat", fat);
                             intent.putExtra("natrum", natrum);
                             intent.putExtra("sugar", sugar);
-                            intent.putExtra("calory", kcal);
+                            intent.putExtra("kcal", kcal);
 
                             startActivity(intent);
                             finish();
