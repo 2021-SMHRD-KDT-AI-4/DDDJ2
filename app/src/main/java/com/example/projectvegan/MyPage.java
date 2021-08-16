@@ -193,16 +193,7 @@ public class MyPage extends AppCompatActivity {
             public void onClick(View v) {
                 if (tv_my_cal_date.getText().toString().equals(todayData)){
                     String time = "아침";
-
                     itemSendRequest(time);
-//                    Intent intent = getIntent();
-//                    carbohydrate += (int)intent.getDoubleExtra("carbohydrate",0);
-//                    protein += (int)intent.getDoubleExtra("protein",0);
-//                    fat += (int)intent.getDoubleExtra("fat",0);
-//                    natrum += (int)intent.getDoubleExtra("natrum",0);
-//                    sugar += (int)intent.getDoubleExtra("sugar",0);
-//                    kcal += (int)intent.getIntExtra("kcal",0);
-
                 }
             }
         });
@@ -213,16 +204,7 @@ public class MyPage extends AppCompatActivity {
             public void onClick(View v) {
                 if (tv_my_cal_date.getText().toString().equals(todayData)){
                     String time = "점심";
-
                     itemSendRequest(time);
-//                    Intent intent = getIntent();
-//                    carbohydrate += Float.parseFloat(intent.getStringExtra("carbohydrate"));
-//                    protein += Float.parseFloat(intent.getStringExtra("protein"));
-//                    fat +=Float.parseFloat(intent.getStringExtra("fat"));
-//                    natrum += Float.parseFloat(intent.getStringExtra("natrum"));
-//                    sugar += Float.parseFloat(intent.getStringExtra("sugar"));
-//                    kcal += intent.getIntExtra("kcal",0);
-
                 }
             }
         });
@@ -233,16 +215,7 @@ public class MyPage extends AppCompatActivity {
             public void onClick(View v) {
                 if (tv_my_cal_date.getText().toString().equals(todayData)){
                     String time = "저녁";
-
                     itemSendRequest(time);
-//                    Intent intent = getIntent();
-//                    carbohydrate += intent.getDoubleExtra("carbohydrate",0);
-//                    protein += intent.getDoubleExtra("protein",0);
-//                    fat +=intent.getDoubleExtra("fat",0);
-//                    natrum += intent.getDoubleExtra("natrum",0);
-//                    sugar += intent.getDoubleExtra("sugar",0);
-//                    kcal += intent.getIntExtra("kcal",0);
-
                 }
             }
         });

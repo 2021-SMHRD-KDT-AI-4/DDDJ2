@@ -27,7 +27,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.projectvegan.Challenge;
 import com.example.projectvegan.Community;
 import com.example.projectvegan.DTO.SNSDTO;
-import com.example.projectvegan.Main;
 import com.example.projectvegan.PreferenceManager;
 import com.example.projectvegan.Quiz;
 import com.example.projectvegan.R;
@@ -36,11 +35,11 @@ import com.example.projectvegan.RankItem;
 import com.example.projectvegan.Recipe;
 import com.example.projectvegan.RecipeItem;
 import com.example.projectvegan.Scanner;
+import com.example.projectvegan.Yolo;
 import com.example.projectvegan.databinding.FragmentHomeBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -150,7 +149,9 @@ public class HomeFragment extends Fragment {
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SNSsendRequest();
+                Intent intent = new Intent(getContext(), Yolo.class);
+                startActivity(intent);
+
             }
         });
         return root;
