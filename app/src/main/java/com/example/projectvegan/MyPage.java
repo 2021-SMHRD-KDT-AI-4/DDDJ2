@@ -276,7 +276,7 @@ public class MyPage extends AppCompatActivity {
         });
 
         pg_kcal.setProgress(kcal);
-        tv_my_kcal.setText(progress+"");
+        tv_my_kcal.setText(kcal+"");
         //영양소 막대차트
         BarChart barChart = findViewById(R.id.bar_chart);
         ArrayList<BarEntry> nutrient = new ArrayList<>();
