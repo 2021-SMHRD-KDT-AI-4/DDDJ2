@@ -119,6 +119,7 @@ public class CommunityUpdate extends AppCompatActivity {
 
                 resizeImg = BitmapToBase64(bitmap);
                 sendRequest();
+
             }
         });
     } // End onCreate
