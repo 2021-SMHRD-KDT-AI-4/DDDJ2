@@ -1,6 +1,7 @@
 package com.example.projectvegan.ui.home;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -149,9 +150,9 @@ public class HomeFragment extends Fragment {
         btn_sns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Yolo.class);
+                Intent intent = new Intent(getContext(), Community.class);
                 startActivity(intent);
-
+//                SNSsendRequest();
             }
         });
         return root;
@@ -293,7 +294,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void SNSsendRequest(){
+    /*public void SNSsendRequest(){
 
         // Voolley Lib 새료운 요청객체 생성
         queue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -316,7 +317,7 @@ public class HomeFragment extends Fragment {
                                 String user_id = jsonArray.getJSONObject(i).getString("user_id");
                                 String sns_title = jsonArray.getJSONObject(i).getString("sns_title");
                                 String sns_content = jsonArray.getJSONObject(i).getString("sns_content");
-                                BufferedInputStream sns_img = (BufferedInputStream) jsonArray.getJSONObject(i).get("sns_img_buffer");
+                                Bitmap sns_img = (Bitmap) jsonArray.getJSONObject(i).get("sns_img_buffer");
                                 String user_name = jsonArray.getJSONObject(i).getString("user_name");
 
                                 snsdto = new SNSDTO(user_id,sns_title,sns_content, sns_img, user_name);
@@ -363,7 +364,7 @@ public class HomeFragment extends Fragment {
             }
         };
         queue.add(stringRequest);
-    }
+    }*/
 
     @Override
     public void onDestroyView() {

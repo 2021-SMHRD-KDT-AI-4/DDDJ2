@@ -1,6 +1,7 @@
 package com.example.projectvegan.DTO;
 
-import java.io.BufferedInputStream;
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 
 public class SNSDTO implements Serializable {
@@ -9,19 +10,19 @@ public class SNSDTO implements Serializable {
     private String user_id;
     private String sns_title;
     private String sns_content;
-    private BufferedInputStream sns_img;
+    private int sns_img;
     private String user_name;
 
 
-    public SNSDTO(String user_id, String sns_title, String sns_content, BufferedInputStream sns_img, String user_name) {
+    public SNSDTO(String user_id,String user_name, String sns_title, String sns_content, int sns_img ) {
         this.user_id = user_id;
+        this.user_name = user_name;
         this.sns_title = sns_title;
         this.sns_content = sns_content;
         this.sns_img = sns_img;
-        this.user_name = user_name;
     }
 
-    public SNSDTO(int sns_code, String user_id, String sns_title, String sns_content, BufferedInputStream sns_img, String user_name) {
+    public SNSDTO(int sns_code, String user_id, String sns_title, String sns_content, int sns_img, String user_name) {
         this.sns_code = sns_code;
         this.user_id = user_id;
         this.sns_title = sns_title;
@@ -53,10 +54,10 @@ public class SNSDTO implements Serializable {
     public void setSns_content(String sns_content) {
         this.sns_content = sns_content;
     }
-    public BufferedInputStream getSns_img() {
+    public int getSns_img() {
         return sns_img;
     }
-    public void setSns_img(BufferedInputStream sns_img) {
+    public void setSns_img(int sns_img) {
         this.sns_img = sns_img;
     }
     public String getUser_name() {

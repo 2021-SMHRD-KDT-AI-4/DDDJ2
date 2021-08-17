@@ -47,6 +47,8 @@ public class Yolo extends AppCompatActivity {
         img_server = findViewById(R.id.img_server);
         btn_search = findViewById(R.id.btn_search);
 
+
+
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
