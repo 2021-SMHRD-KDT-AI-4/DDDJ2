@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,7 +45,7 @@ public class Community extends AppCompatActivity {
     private StringRequest stringRequest;
 
 
-    private ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
+//    private ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
 
 
     @Override
@@ -104,9 +105,9 @@ public class Community extends AppCompatActivity {
     private void settingList(){
 
         Intent intent = getIntent();
-        snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
+//        snsList = (ArrayList<SNSDTO>) intent.getSerializableExtra("snsList");
 
-        for (int i = 0; i < snsList.size(); i++) {
+        /*for (int i = 0; i < snsList.size(); i++) {
             communityItemsArrayList.add(
                     new SNSDTO(
                     snsList.get(i).getSns_code(),
@@ -116,10 +117,9 @@ public class Community extends AppCompatActivity {
                     snsList.get(i).getSns_img(),
                     snsList.get(i).getUser_name())
             );
-        }
-//        communityItemsArrayList.add(new CommunityItem(R.drawable.basic,"나","qwer1@naver.com","집에가자!",R.drawable.quizimg1,"이제 집에 가이지"));
-//        communityItemsArrayList.add(new CommunityItem(R.drawable.basic,"너","qwer2@naver.com","가자!",R.drawable.quizimg2,"프로젝트 그만!!!"));
-//        communityItemsArrayList.add(new CommunityItem(R.drawable.basic,"우리","qwer3@naver.com","가자!!!!!",R.drawable.quizimg3,"가즈아!!!!"));
+        }*/
+        communityItemsArrayList.add(new SNSDTO("dodo@gmail.com","도도동","채식 1일차","채식 도전 1일차 생각보다 할만했다", R.drawable.vgimg1));
+        communityItemsArrayList.add(new SNSDTO("aa@gmail.com","aa","채식 도전!!","하루 한 끼 채식으로 환경을 지키자~", R.drawable.vgimg2));
 
         communityAdapter.notifyDataSetChanged();
     }

@@ -41,12 +41,12 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public void onBindViewHolder(CommunityAdapter.ViewHolder holder, final int position) {
 
-
         holder.userName.setText(communityItemArrayList.get(position).getUser_name());
         holder.userEmail.setText(communityItemArrayList.get(position).getUser_id());
         holder.comTitle.setText(communityItemArrayList.get(position).getSns_title());
-        // holder.comImg.setImageBitmap(myBitmap);
         holder.userText.setText(communityItemArrayList.get(position).getSns_content());
+        holder.comImg.setImageResource(communityItemArrayList.get(position).getSns_img());
+
     }
 
     public static Bitmap StringToBitmap(String encodedString) {
@@ -78,12 +78,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            this.userName = itemView.findViewById(R.id.user_name);
             this.userEmail = itemView.findViewById(R.id.user_email);
+            this.userName = itemView.findViewById(R.id.user_name);
             this.comTitle = itemView.findViewById(R.id.com_title);
-            this.comImg = itemView.findViewById(R.id.com_img);
             this.userText = itemView.findViewById(R.id.user_text);
+            this.comImg = itemView.findViewById(R.id.com_img);
 
         }
     }
