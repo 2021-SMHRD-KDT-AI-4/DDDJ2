@@ -322,8 +322,13 @@ public class Scanner extends AppCompatActivity {
             String type = PreferenceManager.getString(Scanner.this,"category");
             Log.v("result",result);
             ArrayList<String> contentslist = readExcel(result,type);
-            Log.v("주의성분","타입:"+type+contentslist+"");
-            Toast.makeText(getApplicationContext(),"주의성분"+contentslist+"",Toast.LENGTH_LONG).show();
+            if (contentslist.size()==0){
+                Toast.makeText(getApplicationContext(),"섭취가능한 식품입니다",Toast.LENGTH_LONG).show();
+                Log.v("주의성분", "타입:" + type + contentslist + "");
+            }else {
+                Log.v("주의성분", "타입:" + type + contentslist + "");
+                Toast.makeText(getApplicationContext(), "주의성분" + contentslist + "", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
