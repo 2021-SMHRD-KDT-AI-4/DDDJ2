@@ -40,7 +40,7 @@ public class Community extends AppCompatActivity {
     private ArrayList<SNSDTO> communityItemsArrayList, comFilteredList;
     CommunityAdapter communityAdapter;
     LinearLayoutManager linearLayoutManager;
-    private Button update_com;
+    private Button update_com,btn_chal_check;
     private RequestQueue queue;
     private StringRequest stringRequest;
 
@@ -61,17 +61,7 @@ public class Community extends AppCompatActivity {
         String startEx = PreferenceManager.getString(getApplicationContext(), "startEx");
         String startChal = PreferenceManager.getString(getApplicationContext(), "startChal");
 
-
-        if(!startEx.equals("데이터가 없습니다.")){
-
-        }else{
-
-        }
-
-        if(!startChal.equals("데이터가 없습니다.")){
-            Toast.makeText(getApplicationContext(),"2인 이상 채식 사진 찍기",Toast.LENGTH_SHORT).show();
-        }else {
-        }
+        btn_chal_check = findViewById(R.id.btn_chal_check);
 
         com_list = findViewById(R.id.com_list);
         update_com = findViewById(R.id.update_com);
@@ -89,6 +79,35 @@ public class Community extends AppCompatActivity {
         com_list.addItemDecoration(dividerItemDecoration);
 
         settingList();
+
+        Log.d("chal",startChal);
+        Log.d("ex",startEx);
+
+        if(startEx.equals("데이터가 없습니다.")){
+            btn_chal_check.setVisibility(View.INVISIBLE);
+        }else {
+            btn_chal_check.setVisibility(View.VISIBLE);
+
+            btn_chal_check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"2인 이상 채식 사진 찍기",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        if(startChal.equals("데이터가 없습니다.")){
+            btn_chal_check.setVisibility(View.INVISIBLE);
+        }else {
+            btn_chal_check.setVisibility(View.VISIBLE);
+
+            btn_chal_check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),"2인 이상 채식 사진 찍기",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
 
         communityItemsArrayList.addAll(comFilteredList);
 

@@ -152,6 +152,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Community.class);
                 startActivity(intent);
+
 //                SNSsendRequest();
             }
         });

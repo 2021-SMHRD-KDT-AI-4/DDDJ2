@@ -81,7 +81,7 @@ public class Main extends AppCompatActivity {
         }else{
             if(point >= 1000){
                 img_tree.setImageResource(imgs[2]);
-            }else if(point >=500){
+            }else if(point >=300){
                 img_tree.setImageResource(imgs[1]);
             }else if(point >=0){
                 img_tree.setImageResource(imgs[0]);

@@ -12,6 +12,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,6 +24,7 @@ import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Yolo extends AppCompatActivity {
     private ImageView img_server;
@@ -47,7 +50,8 @@ public class Yolo extends AppCompatActivity {
         img_server = findViewById(R.id.img_server);
         btn_search = findViewById(R.id.btn_search);
 
-
+        Intent intent = getIntent();
+        Bundle bitmap = intent.getBundleExtra("img");
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
