@@ -156,8 +156,6 @@ public class Community extends AppCompatActivity {
         if(title != null) {
             communityItemsArrayList.add(new SNSDTO(id, name, title, text,img));
             Toast.makeText(getApplicationContext(),"미션 성공",Toast.LENGTH_LONG).show();
-            PreferenceManager.setInt(getApplicationContext(), "point", point+500);
-
         }
         communityAdapter.notifyDataSetChanged();
     }
@@ -166,6 +164,7 @@ public class Community extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+
                 finish();
                 return true;
             }

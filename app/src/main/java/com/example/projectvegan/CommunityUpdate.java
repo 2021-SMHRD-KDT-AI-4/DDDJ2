@@ -60,6 +60,9 @@ public class CommunityUpdate extends AppCompatActivity {
     Uri uri = null;
     String resizeImg;
 
+    String id ;
+    String pw;
+    int point = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,10 @@ public class CommunityUpdate extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("커뮤니티 등록");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        point =PreferenceManager.getInt(getApplicationContext(),"point");
+        id = PreferenceManager.getString(getApplicationContext(), "id");
+        pw = PreferenceManager.getString(getApplicationContext(), "pw");
 
         imgView = findViewById(R.id.imgView);
         btn_com_cancel = findViewById(R.id.btn_com_cancel);
@@ -129,7 +136,9 @@ public class CommunityUpdate extends AppCompatActivity {
                 intent.putExtra("text",edt_com_text.getText().toString());
                 intent.putExtra("img", R.drawable.vgimg3);
                 startActivity(intent);
+                sendPointRequest();
                 finish();
+
             }
         });
     } // End onCreate
@@ -201,7 +210,62 @@ public class CommunityUpdate extends AppCompatActivity {
         queue.add(stringRequest);
     } // End sendRequest
 
+    public void sendPointRequest(){
+        // Voolley Lib 새료운 요청객체 생성
+        queue = Volley.newRequestQueue(this);
+        String url = "http://211.63.240.58:8081/3rd_project/PointService";
+        stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
 
+                if(!response.equals("null")){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        PreferenceManager.setInt(getApplicationContext(), "point", jsonObject.getInt("user_point"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"로그인 실패..",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("id",id);
+                params.put("pw",pw);
+
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
     // 이미지 리사이즈
     private Bitmap resize(Context context, Uri uri, int resize){
         Bitmap resizeBitmap=null;

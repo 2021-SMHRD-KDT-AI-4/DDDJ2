@@ -323,7 +323,7 @@ public class Scanner extends AppCompatActivity {
             Log.v("result",result);
             ArrayList<String> contentslist = readExcel(result,type);
             Log.v("주의성분","타입:"+type+contentslist+"");
-            Toast.makeText(getApplicationContext(),"주의성분"+contentslist+"",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"주의성분"+contentslist+"",Toast.LENGTH_LONG).show();
         }
     }
 
