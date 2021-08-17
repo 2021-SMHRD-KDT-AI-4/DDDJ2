@@ -123,6 +123,8 @@ public class Main extends AppCompatActivity {
                 PreferenceManager.remove(getApplicationContext(), "gender");
                 PreferenceManager.remove(getApplicationContext(), "tel");
                 PreferenceManager.remove(getApplicationContext(), "point");
+                PreferenceManager.remove(getApplicationContext(), "startEx");
+                PreferenceManager.remove(getApplicationContext(), "startChal");
 
                 Intent intent = new Intent(getApplicationContext(), Main.class);
                 startActivity(intent);

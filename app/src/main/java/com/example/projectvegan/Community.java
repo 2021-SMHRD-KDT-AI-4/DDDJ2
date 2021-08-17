@@ -156,8 +156,6 @@ public class Community extends AppCompatActivity {
         if(title != null) {
             communityItemsArrayList.add(new SNSDTO(id, name, title, text,img));
             Toast.makeText(getApplicationContext(),"미션 성공",Toast.LENGTH_LONG).show();
-            PreferenceManager.setInt(getApplicationContext(), "point", point+500);
-
         }
         communityAdapter.notifyDataSetChanged();
     }
