@@ -47,7 +47,11 @@ public class Community extends AppCompatActivity {
 
 //    private ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
 
-
+    String id = "";
+    String name = "";
+    String title = "";
+    String text = "";
+    int img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +61,16 @@ public class Community extends AppCompatActivity {
         actionBar.setTitle("커뮤니티");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+        id = PreferenceManager.getString(getApplicationContext(), "id");
+        name = PreferenceManager.getString(getApplicationContext(), "name");
         String startEx = PreferenceManager.getString(getApplicationContext(), "startEx");
         String startChal = PreferenceManager.getString(getApplicationContext(), "startChal");
+
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        text = intent.getStringExtra("text");
+        img = intent.getIntExtra("img",0);
+
 
         btn_chal_check = findViewById(R.id.btn_chal_check);
 
@@ -139,7 +150,10 @@ public class Community extends AppCompatActivity {
         }*/
         communityItemsArrayList.add(new SNSDTO("dodo@gmail.com","도도동","채식 1일차","채식 도전 1일차 생각보다 할만했다", R.drawable.vgimg1));
         communityItemsArrayList.add(new SNSDTO("aa@gmail.com","aa","채식 도전!!","하루 한 끼 채식으로 환경을 지키자~", R.drawable.vgimg2));
-
+        if(title != null) {
+            communityItemsArrayList.add(new SNSDTO(id, name, title, text,img));
+            Toast.makeText(getApplicationContext(),"미션 성공",Toast.LENGTH_LONG).show();
+        }
         communityAdapter.notifyDataSetChanged();
     }
 
