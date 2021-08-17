@@ -45,6 +45,7 @@ public class Community extends AppCompatActivity {
     private StringRequest stringRequest;
 
 
+
 //    private ArrayList<SNSDTO> snsList = new ArrayList<SNSDTO>();
 
     String id = "";
@@ -52,6 +53,7 @@ public class Community extends AppCompatActivity {
     String title = "";
     String text = "";
     int img;
+    int point;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class Community extends AppCompatActivity {
         name = PreferenceManager.getString(getApplicationContext(), "name");
         String startEx = PreferenceManager.getString(getApplicationContext(), "startEx");
         String startChal = PreferenceManager.getString(getApplicationContext(), "startChal");
+        point =PreferenceManager.getInt(getApplicationContext(),"point");
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
@@ -153,6 +156,8 @@ public class Community extends AppCompatActivity {
         if(title != null) {
             communityItemsArrayList.add(new SNSDTO(id, name, title, text,img));
             Toast.makeText(getApplicationContext(),"미션 성공",Toast.LENGTH_LONG).show();
+            PreferenceManager.setInt(getApplicationContext(), "point", point+500);
+
         }
         communityAdapter.notifyDataSetChanged();
     }
