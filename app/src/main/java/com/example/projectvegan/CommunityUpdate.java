@@ -51,7 +51,7 @@ public class CommunityUpdate extends AppCompatActivity {
     private Button btn_com_cancel,btn_com_check;
     private EditText edt_com_title,edt_com_text;
     private ImageView imgView;
-    Bitmap bitmap;
+    Bitmap bitmap = null;
     // Server에게 요청하는 객체
     private RequestQueue queue;
     // 요청할때 보낼 데이터 전송방식, 보내는 데이터, 받아올 데이터 타입 정의 등 설정하는 문자열
@@ -96,6 +96,7 @@ public class CommunityUpdate extends AppCompatActivity {
                 // 핸드폰 갤러리 접속
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 812);
+
 //                Intent intent1 = new Intent(getApplicationContext(),Yolo.class);
 //                intent1.putExtra("img",bitmap);
 //                startActivityForResult(intent1,900);
@@ -115,14 +116,20 @@ public class CommunityUpdate extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // ImageView 비트맵 가져오기
-                BitmapDrawable drawable = (BitmapDrawable) imgView.getDrawable();
+                /*BitmapDrawable drawable = (BitmapDrawable) imgView.getDrawable();
                 Bitmap bitmap = drawable.getBitmap();
 
                 bitmap = resize(getApplicationContext(), uri, 250);
 
                 resizeImg = BitmapToBase64(bitmap);
-                sendRequest();
+                sendRequest();*/
 
+                Intent intent = new Intent(getApplicationContext(),Community.class);
+                intent.putExtra("title",edt_com_title.getText().toString());
+                intent.putExtra("text",edt_com_text.getText().toString());
+                intent.putExtra("img", R.drawable.vgimg3);
+                startActivity(intent);
+                finish();
             }
         });
     } // End onCreate
