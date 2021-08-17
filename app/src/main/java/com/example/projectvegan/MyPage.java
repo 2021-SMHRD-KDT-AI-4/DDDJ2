@@ -482,7 +482,6 @@ public class MyPage extends AppCompatActivity {
                 params.put("user_id",id);
                 params.put("today_date",todayData);
                 params.put("time",String.valueOf(time));
-                params.put("carbohydrate",String.valueOf(carbohydrate));
 
                 return params;
             }

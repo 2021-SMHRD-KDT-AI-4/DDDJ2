@@ -56,6 +56,22 @@ public class Community extends AppCompatActivity {
         actionBar.setTitle("커뮤니티");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+        String startEx = PreferenceManager.getString(getApplicationContext(), "startEx");
+        String startChal = PreferenceManager.getString(getApplicationContext(), "startChal");
+
+
+        if(!startEx.equals("데이터가 없습니다.")){
+
+        }else{
+
+        }
+
+        if(!startChal.equals("데이터가 없습니다.")){
+            Toast.makeText(getApplicationContext(),"2인 이상 채식 사진 찍기",Toast.LENGTH_SHORT).show();
+        }else {
+        }
+
         com_list = findViewById(R.id.com_list);
         update_com = findViewById(R.id.update_com);
 

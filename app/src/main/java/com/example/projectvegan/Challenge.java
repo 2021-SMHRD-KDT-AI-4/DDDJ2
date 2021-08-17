@@ -54,6 +54,7 @@ public class Challenge extends AppCompatActivity {
 
         if(!startEx.equals("데이터가 없습니다.")){
             tv_ex_ok.setVisibility(View.VISIBLE);
+
         }else{
             tv_ex_ok.setVisibility(View.INVISIBLE);
         }
