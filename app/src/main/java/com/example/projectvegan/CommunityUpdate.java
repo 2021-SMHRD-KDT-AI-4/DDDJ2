@@ -135,8 +135,8 @@ public class CommunityUpdate extends AppCompatActivity {
                 intent.putExtra("title",edt_com_title.getText().toString());
                 intent.putExtra("text",edt_com_text.getText().toString());
                 intent.putExtra("img", R.drawable.vgimg3);
-                startActivity(intent);
                 sendPointRequest();
+                startActivity(intent);
                 finish();
 
             }
@@ -223,6 +223,7 @@ public class CommunityUpdate extends AppCompatActivity {
                 if(!response.equals("null")){
                     try {
                         JSONObject jsonObject = new JSONObject(response);
+                        Log.v("pointtest", String.valueOf(jsonObject.getInt("user_point")));
                         PreferenceManager.setInt(getApplicationContext(), "point", jsonObject.getInt("user_point"));
 
                     } catch (JSONException e) {

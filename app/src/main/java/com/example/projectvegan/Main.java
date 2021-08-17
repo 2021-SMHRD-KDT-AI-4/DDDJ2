@@ -32,6 +32,17 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        String id = PreferenceManager.getString(getApplicationContext(), "id");
+        String pw = PreferenceManager.getString(getApplicationContext(), "pw");
+        String name = PreferenceManager.getString(getApplicationContext(), "name");
+        String category = PreferenceManager.getString(getApplicationContext(), "category");
+        int age = PreferenceManager.getInt(getApplicationContext(), "age");
+        String gender = PreferenceManager.getString(getApplicationContext(), "gender");
+        String tel = PreferenceManager.getString(getApplicationContext(),"tel");
+        int point =PreferenceManager.getInt(getApplicationContext(),"point");
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -54,14 +65,7 @@ public class Main extends AppCompatActivity {
         TextView tv_poing = (TextView)nav_header_view.findViewById(R.id.tv_point);
         ImageView img_tree = (ImageView)nav_header_view.findViewById(R.id.img_tree);
 
-        String id = PreferenceManager.getString(getApplicationContext(), "id");
-        String pw = PreferenceManager.getString(getApplicationContext(), "pw");
-        String name = PreferenceManager.getString(getApplicationContext(), "name");
-        String category = PreferenceManager.getString(getApplicationContext(), "category");
-        int age = PreferenceManager.getInt(getApplicationContext(), "age");
-        String gender = PreferenceManager.getString(getApplicationContext(), "gender");
-        String tel = PreferenceManager.getString(getApplicationContext(),"tel");
-        int point =PreferenceManager.getInt(getApplicationContext(),"point");
+
 
         TextView tv_nav_login = (TextView) nav_header_view.findViewById(R.id.tv_nav_login);
         if(id.equals("데이터가 없습니다.")) {
@@ -79,6 +83,14 @@ public class Main extends AppCompatActivity {
             tv_poing.setVisibility(View.INVISIBLE);
             img_tree.setVisibility(View.INVISIBLE);
         }else{
+            btn_nav_logout.setVisibility(View.VISIBLE);
+            btn_nav_mypage.setVisibility(View.VISIBLE);
+            tv_poing.setVisibility(View.VISIBLE);
+            img_tree.setVisibility(View.VISIBLE);
+            tv_poing.setText("포인트 : " + point);
+            tv_nav_login.setText(name);
+            tv_nav_subtitle.setText(id);
+
             if(point >= 1000){
                 img_tree.setImageResource(imgs[2]);
             }else if(point >=300){
@@ -86,15 +98,7 @@ public class Main extends AppCompatActivity {
             }else if(point >=0){
                 img_tree.setImageResource(imgs[0]);
             }
-            btn_nav_logout.setVisibility(View.VISIBLE);
-            btn_nav_mypage.setVisibility(View.VISIBLE);
-            tv_poing.setVisibility(View.VISIBLE);
-            img_tree.setVisibility(View.VISIBLE);
-            tv_nav_login.setText(name);
-            tv_nav_subtitle.setText(id);
-            tv_poing.setText("포인트 : " + point);
         }
-
 
         btn_nav_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
